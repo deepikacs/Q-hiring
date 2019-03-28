@@ -3,6 +3,7 @@ import logo from '../../Images/qwinix.png';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { Question } from '../../Actions/QuestionAction';
+import { selectedOptionsDetails } from '../../Actions/SelectedOptionAction';
 
 import './Main.css';
 
@@ -39,14 +40,14 @@ class Main extends Component {
     this.setState({checked:index});
     console.log(this.state.checked);
     const data={
-      answerid:ansid,
+      optionid:ansid,
       questionid:qid
     };
   
   if( this.state.answerArray.length>0){
     const index1 = this.state.answerArray.findIndex((res) => res.questionid === qid);
     if(index1 != -1){
-      this.state.answerArray[index1]['answerid']=ansid;
+      this.state.answerArray[index1]['optionid']=ansid;
     }
     else{
       this.state.answerArray.push(data);
@@ -57,6 +58,16 @@ class Main extends Component {
   }  
     console.log(this.state.answerArray)
     
+  }
+
+  handleSubmit = () =>{
+    this.setState({answerArray:this.state.answerArray});
+    const selectedOptions={
+      questionid:this.state.answerArray.questionid,
+      optionid:this.state.answerArray.optionid
+    };
+    this.props.selectedOptionsDetails(selectedOptions);
+
   }
 
 
@@ -81,7 +92,7 @@ class Main extends Component {
         <div>
         {this.props.questionDetails.map((item,index)=>
         (
-            <div className="paddleft-30" ><span className="text-bold">{index+1}.  {item.questtext}</span>
+            <div className="paddleft-115" ><span className="text-bold">{index+1}.  {item.questtext}</span>
 
         
              {item.answers.map((ans,index) =>
@@ -105,7 +116,7 @@ class Main extends Component {
           <div className='col-sm-6'>
           </div>
           <div className='col-sm-1'>
-            <p className="dot paddTop-25">Submit</p>
+            <p className="dot paddTop-25" onClick={this.handleSubmit}>Submit</p>
           </div>
         </div>
 
@@ -119,7 +130,8 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   debugger;
   const { error ,questionDetails} = state.QuestionReducers;
-  return { error,questionDetails };
+  // const {optionDetails} = state.SelectedOptionReducers;
+  return { error,questionDetails};
 };
 
-export default withRouter(connect(mapStateToProps, { Question })(Main));
+export default withRouter(connect(mapStateToProps, { Question ,selectedOptionsDetails})(Main));
