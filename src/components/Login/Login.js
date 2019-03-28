@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './Login.css';
 import { submitLogin } from '../../Actions/LoginAction';
+import logo from '../image/logo.png';
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class Login extends Component {
     this.submituserLoginForm= this.submituserLoginForm.bind(this);
   }
   handleChange(e) {
-    // this.setState({ [e.target.name]: e.target.value });
     let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
       this.setState({
@@ -23,69 +23,38 @@ class Login extends Component {
       });
   }
 
-
   submituserLoginForm(e) {
     e.preventDefault();
-    debugger;
-    
     if (this.validateForm()) {
         let fields = this.state.fields;
 
         const loginDetails={mobileno: fields["mobileno"],password:fields["password"]};
         this.props.submitLogin(loginDetails);
     }
-
-    
-
   }
 
   validateForm() {
-
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
-
-
     if (!fields["mobileno"]) {
       formIsValid = false;
       errors["mobileno"] = "*Please enter your mobile no.";
     }
-
-    // if (typeof fields["mobileno"] !== "undefined") {
-    //   if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
-    //     formIsValid = false;
-    //     errors["mobileno"] = "*Please enter valid mobile no.";
-    //   }
-    // }
-
     if (!fields["password"]) {
       formIsValid = false;
       errors["password"] = "*Please enter your password.";
     }
-
-    // if (typeof fields["password"] !== "undefined") {
-    //     debugger;
-    //   if (!fields["password"].match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
-    //     formIsValid = false;
-    //     errors["password"] = "*Please enter secure and strong password.";
-    //   }
-    // }
-
     this.setState({
       errors: errors
     });
     return formIsValid;
-
-
   }
 
   render() {
     return (
       <React.Fragment>
-        
-
-
-        {/* login */}
+        <center><img src={logo} className="padding-top" alt="logo"/></center>
         <div className="div-align">
         <center><h3>Login page</h3></center>
         <form method=""  name=""  onSubmit= {this.submituserLoginForm} >
@@ -99,9 +68,6 @@ class Login extends Component {
         <input type="submit" className="button"  value="Register"/>
         </form>
         </div>
-
-
-       
       </React.Fragment>
 
     );

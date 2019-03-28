@@ -10,10 +10,8 @@ export default (state = INPUT_STATE, action) => {
    case ActionTypes.FETCH_LOGIN_BEGIN:
     return { ...state, loading: true, error: null };
    case ActionTypes.FETCH_LOGIN_SUCCESS:
-   console.log(action);
     return { ...state, loading: false}
   case ActionTypes.FETCH_LOGIN_FAILURE:
-  debugger;
     return { ...state, loading: false, error: action.payload.Login}
   default:
     return state;

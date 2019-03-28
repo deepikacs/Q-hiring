@@ -2,14 +2,12 @@
     width:45% !important;
 }
 
-/* loginvalid page */
 .div-align{
     width: 45%;
     border: 2px solid #d6d7da;
     padding: 38px 15px 71px 67px;;
     border-radius: 5px;
     font-family: arial;
-    /* line-height: 16px; */
     color: #333333;
     font-size: 14px;
     background: #ffffff;
@@ -44,4 +42,8 @@
   .sucessMsg {
     color: #6B8E23;
     margin-bottom: 10px;
+  }
+
+  .padding-top {
+    padding-top: 5%;
   }

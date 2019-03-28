@@ -2,23 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './Signup.css';
-
 import { submitSignup } from '../../Actions/SignupAction'
+import logo from '../image/logo.png';
 
 class Signup extends Component {
-
     constructor() {
         super();
         this.state = {
             fields: {},
             errors: {}
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
-
     };
-
     handleChange(e) {
         debugger;
         let fields = this.state.fields;
@@ -26,9 +22,7 @@ class Signup extends Component {
         this.setState({
             fields
         });
-
     }
-
     submituserRegistrationForm(e) {
         e.preventDefault();
         if (this.validateForm()) {
@@ -47,11 +41,8 @@ class Signup extends Component {
                 password: fields["password"]
             }
             this.props.submitSignup(SignupDetails);
-
         }
-
     }
-
     validateForm() {
 
         let fields = this.state.fields;
@@ -88,7 +79,6 @@ class Signup extends Component {
         }
 
         if (typeof fields["emailid"] !== "undefined") {
-            //regular expression for email validation
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
             if (!pattern.test(fields["emailid"])) {
                 formIsValid = false;
@@ -190,23 +180,20 @@ class Signup extends Component {
 
         if (typeof fields["confirmpassword"] !== "undefined") {
             debugger;
-            if (fields["confirmpassword"] != fields["password"]) {
+            if (fields["confirmpassword"] !== fields["password"]) {
                 formIsValid = false;
                 errors["password"] = "*Passwords do not match.";
             }
         }
-
         this.setState({
             errors: errors
         });
         return formIsValid;
-
-
     }
-
     render() {
         return (
-
+            <div className="container">
+            <center><img src={logo} className="align" alt="logo"/></center>
             <div className="div-align">
                 <h3>Registration page</h3>
                 <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
@@ -257,7 +244,7 @@ class Signup extends Component {
                     <input type="submit" className="button" value="Register" />
                 </form>
             </div>
-
+            </div>
         );
     }
 }

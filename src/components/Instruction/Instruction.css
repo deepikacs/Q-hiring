@@ -1,3 +1,19 @@
-.red{
-    border-top: 3px solid red !important;
-  }
+.red {
+  border-top: 3px solid red !important;
+}
+.green {
+  border-top: 3px solid green !important;
+}
+.yellow {
+  border-top: 3px solid yellow !important;
+}
+.pink {
+  border-top: 3px solid pink !important;
+}
+.purple {
+  border-top: 3px solid purple !important;
+}
+.container {
+  padding-top: 5%;
+  width:75%;
+}
