@@ -23,7 +23,7 @@ export function ErrorFunc(ActionType, error) {
 export function submitSignup(userdata) {
     return dispatch => {
       dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN ));
-      HttpWrapper('POST', '/signup', false, userdata)
+      HttpWrapper('POST', '/user/signup', false, userdata)
         .then(response => {
             debugger;
             console.log(response)

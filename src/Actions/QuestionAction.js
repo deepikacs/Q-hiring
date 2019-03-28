@@ -19,22 +19,20 @@ export function ErrorFunc(ActionType, error) {
         payload: error 
     }
 }
-
-export function submitLogin(logindata) {
+export function Question() {
+    debugger;
     return dispatch => {
-      dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN ));
-      HttpWrapper('POST', '/user/login', false, logindata)
+      dispatch(BeginFunc(ActionTypes. FETCH_QUESTION_BEGIN ));
+      HttpWrapper('GET', '/question/getAllwithoptions', true)
         .then(response => {
       debugger;
         console.log(response)
-          dispatch(SuccessFunc(ActionTypes.FETCH_LOGIN_SUCCESS,response.data));
-          localStorage.setItem('token', response.data.token);
-          browserHistory.push('/instruction');
+          dispatch(SuccessFunc(ActionTypes.FETCH_QUESTION_SUCCESS,response.data));
         })
         
         .catch(error => {
           debugger;
-          dispatch(ErrorFunc(ActionTypes.FETCH_LOGIN_FAILURE,error.response.data));
+          dispatch(ErrorFunc(ActionTypes.FETCH_QUESTION_FAILURE,error));
         });
     };
   }

@@ -8,100 +8,101 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        fields: {},
-        errors: {}
+      mobileno: '',
+      password: '',
+      formErrors: { mobileno: '', password: '' },
+      formValid: false,
+      mobilenoValid: false,
+      passwordValid: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.submituserLoginForm= this.submituserLoginForm.bind(this);
+    this.submituserLoginForm = this.submituserLoginForm.bind(this);
   }
   handleChange(e) {
-    // this.setState({ [e.target.name]: e.target.value });
-    let fields = this.state.fields;
-      fields[e.target.name] = e.target.value;
-      this.setState({
-        fields
-      });
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value },
+      () => { this.ValidateField(name, value) });
   }
 
+  ValidateField(fieldname, value) {
+    let fieldValidationError = this.state.formErrors;
+    let mobilenoValid = this.state.mobilenoValid;
+    let passwordValid = this.state.passwordValid;
 
-  submituserLoginForm(e) {
-    e.preventDefault();
-    debugger;
-    
-    if (this.validateForm()) {
-        let fields = this.state.fields;
+    switch (fieldname) {
+      case 'mobileno':
+        mobilenoValid = value.match(/^[0-9]{10}$/);
+        fieldValidationError.mobileno = mobilenoValid ? '' : 'Invalid Mobile number ';
+        break;
+      // case 'password':
+      //   passwordValid = value.match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+      //   fieldValidationError.password = passwordValid ? '' : "*Please enter secure and strong password."
 
-        const loginDetails={mobileno: fields["mobileno"],password:fields["password"]};
-        this.props.submitLogin(loginDetails);
+      //   break;
+      default:
+        break;
     }
-
-    
+    this.setState({
+      formErrors: fieldValidationError,
+      mobilenoValid: mobilenoValid,
+      passwordValid: passwordValid
+    }, this.validateForm);
 
   }
 
   validateForm() {
-
-    let fields = this.state.fields;
-    let errors = {};
-    let formIsValid = true;
-
-
-    if (!fields["mobileno"]) {
-      formIsValid = false;
-      errors["mobileno"] = "*Please enter your mobile no.";
-    }
-
-    // if (typeof fields["mobileno"] !== "undefined") {
-    //   if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
-    //     formIsValid = false;
-    //     errors["mobileno"] = "*Please enter valid mobile no.";
-    //   }
-    // }
-
-    if (!fields["password"]) {
-      formIsValid = false;
-      errors["password"] = "*Please enter your password.";
-    }
-
-    // if (typeof fields["password"] !== "undefined") {
-    //     debugger;
-    //   if (!fields["password"].match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
-    //     formIsValid = false;
-    //     errors["password"] = "*Please enter secure and strong password.";
-    //   }
-    // }
-
-    this.setState({
-      errors: errors
-    });
-    return formIsValid;
-
-
+    this.setState({ formValid: this.state.mobilenoValid  });
   }
+
+  errorClass(error) {
+    if (error) {
+      return (error.length === 0 ? '' : 'brder-red');
+    }
+    else {
+      return ('');
+    }
+  }
+
+  submituserLoginForm(e) {
+    e.preventDefault();
+    debugger;
+
+    // let fields = this.state.fields;
+
+    // const loginDetails = { mobileno: fields["mobileno"], password: fields["password"] };
+    // this.props.submitLogin(loginDetails);
+
+    const loginDetails ={mobileno:this.state.mobileno,password:this.state.password};
+    this.props.submitLogin(loginDetails);
+  }
+
+
 
   render() {
     return (
       <React.Fragment>
-        
 
-
-        {/* login */}
         <div className="div-align">
-        <center><h3>Login page</h3></center>
-        <form method=""  name=""  onSubmit= {this.submituserLoginForm} >
-        
-        <label>Mobile Number:</label>
-        <input type="number" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange}   />
-        <div className="errorMsg">{this.state.errors.mobileno}</div>
-        <label>Password</label>
-        <input type="password" name="password" value={this.state.fields.password} onChange={this.handleChange} />
-        <div className="errorMsg">{this.state.errors.password}</div>
-        <input type="submit" className="button"  value="Register"/>
-        </form>
+          <center><h3>Login page</h3></center>
+          <form method="" name="" onSubmit={this.submituserLoginForm} >
+
+            <label>Mobile Number:</label>
+            <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
+            <div className="errorMsg">{this.state.formErrors.mobileno}</div>
+
+            <label>Password</label>
+            <input type="password" required className={`${this.errorClass(this.state.formErrors.password)}`} name="password" value={this.state.password} onChange={this.handleChange} />
+            <div className="errorMsg">{this.state.formErrors.passwordValid}</div>
+
+            <input type="submit" className="button" value="Register" disabled={!this.state.formValid} />
+          </form>
+         {/* <center><div className="errorMsg">{this.props.error}</div></center>  */}
+         <center><div className="errorMsg">{this.props.message}</div></center> 
         </div>
 
 
-       
+
       </React.Fragment>
 
     );
@@ -109,9 +110,9 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
-    const {  error } = state.LoginReducers;
-    return { error };
-  };
+  debugger;
+  const { error, message } = state.LoginReducers;
+  return { error, message };
+};
 
 export default withRouter(connect(mapStateToProps, { submitLogin })(Login));

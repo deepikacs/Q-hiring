@@ -1,0 +1,36 @@
+
+  .dot{
+    height: 75px;
+    width:75px;
+    background-color: #ab2525;
+    border-radius: 50%;
+    display: inline-block;
+    float: right !important;
+    text-align: center;
+    color: white;
+    
+  }
+  .paddTop-11{
+    padding-top: 11px;
+}
+.paddTop-25{
+    padding-top: 25px;
+}
+.paddleft-30{
+    padding-left: 30px;
+}
+.text-bold{
+    font-weight: bold;
+}
+.lineHeight{
+    line-height: 35px;
+}
+  .img-align{
+    height: 70px;
+  }
+  .hrztle-scrl{
+      overflow:hidden;
+  }
+  .paddLeft-41{
+    padding-left: 41px;
+  }
