@@ -17,3 +17,68 @@
   padding-top: 5%;
   width:75%;
 }
+
+.Modal {
+  position: absolute;
+  height: 75%;
+  width: 95%;
+  top: 60px;
+  left: 40px;
+  right: 40px;
+  bottom: 60px;
+  background: rgba(15, 15, 15, 1.2);
+  color: white;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0.9;
+
+}
+
+.margin-top{
+  margin-top: 20%;
+}
+.fontSize{
+  font-size: 80px;
+}
+.fnt-size-12{
+  font-size: 12px;
+}
+.border-white{
+  border: 1px solid white;
+}
+.border-green{
+  border: 1px solid green;
+  color: green;
+}
+.mr-top-67{
+  margin-top: -67px;
+}
+.close {
+  top: -72px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  content: ' ';
+  height: 17px;
+  width: 2px;
+  background-color:white;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}

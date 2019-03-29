@@ -23,12 +23,12 @@ export function ErrorFunc(ActionType, error) {
 export function submitSignup(userdata) {
     return dispatch => {
       dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN ));
-      HttpWrapper('POST', '/signup', false, userdata)
+      HttpWrapper('POST', '/api/user/signup', false, userdata)
         .then(response => {
             debugger;
             console.log(response)
           dispatch(SuccessFunc(ActionTypes.ADD_SIGNUP_SUCCESS,response.data));
-          browserHistory.push('/');
+          browserHistory.push('/login');
         })
         .catch(error => {
           debugger;

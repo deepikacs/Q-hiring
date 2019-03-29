@@ -1,258 +1,245 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import './Signup.css';
-import { submitSignup } from '../../Actions/SignupAction'
+import { submitSignup } from '../../Actions/SignupAction';
 import logo from '../image/logo.png';
 
 class Signup extends Component {
-    constructor() {
-        super();
-        this.state = {
-            fields: {},
-            errors: {}
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
-    };
-    handleChange(e) {
-        debugger;
-        let fields = this.state.fields;
-        fields[e.target.name] = e.target.value;
-        this.setState({
-            fields
-        });
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstname: '',
+      lastname: '',
+      email:'',
+      college:'',
+      branch:'',
+      year:'',
+      mobileno:'',
+      batch:'',
+      city:'',
+      password:'',
+      cnfpassword:'',
+
+      formErrors: { firstname: '', lastname: '', email:'',college:'',branch:'',year:'',mobileno:'',batch:'',city:'',password:'',cnfpassword:'', },
+      firstnameValid: false,
+      lastnameValid: false,
+      emailValid: false,
+      collegeValid:false,
+      branchValid:false,
+      yearValid:false,
+      mobilenoValid:false,
+      batchValid:false,
+      cityValid:false,
+      passwordValid:false,
+      cnfpasswordValid:false,
+      formValid: false,
     }
-    submituserRegistrationForm(e) {
-        e.preventDefault();
-        if (this.validateForm()) {
-            debugger;
-            const fields = this.state.fields;
-            let SignupDetails = {
-                firstname: fields["firstname"],
-                lastname: fields["lastname"],
-                email: fields["emailid"],
-                college: fields["college"],
-                branch: fields["branch"],
-                year_of_passing: fields["yearofpassing"],
-                phonenumber: fields["mobileno"],
-                batch: fields["batch"],
-                city: fields["city"],
-                password: fields["password"]
-            }
-            this.props.submitSignup(SignupDetails);
-        }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
+
+  };
+
+
+  handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value },
+      () => { this.validateField(name, value) });
+  }
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let firstnameValid = this.state.firstnameValid;
+    let lastnameValid = this.state.lastnameValid;
+    let emailValid = this.state.emailValid;
+    let collegeValid = this.state.collegeValid;
+    let branchValid = this.state.branchValid;
+    let yearValid = this.state.yearValid;
+    let mobilenoValid = this.state.mobilenoValid;
+    let batchValid = this.state.batchValid;
+    let cityValid = this.state.cityValid;
+    let passwordValid = this.state.passwordValid;
+    let cnfpasswordValid = this.state.cnfpasswordValid;
+
+
+    switch (fieldName) {
+      case 'firstname':
+        firstnameValid = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.firstname = firstnameValid ? '' : ' * Invalid Name :First Name contain characters only.';
+        break;
+      case 'lastname':
+        lastnameValid = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.lastname = lastnameValid ? '' : '* Invalid Name :Last Name contain characters only.';
+        break;
+
+        case 'email':
+        emailValid = value.match(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        fieldValidationErrors.email = emailValid ? '' : '* Invalid email : Please enter valid email-ID.'
+        break;
+
+        case 'college':
+        collegeValid = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.college = collegeValid ? '' : ' *Please enter your college';
+        break;
+
+        case 'branch':
+        branchValid = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.branch = branchValid ? '' : ' *Please enter your branch';
+        break;
+
+        case 'year':
+        yearValid = value.match(/^\d{4}$/);
+        fieldValidationErrors.year = yearValid ? '' : ' *Please enter your year of passing';
+        break;
+
+        case 'mobileno':
+        mobilenoValid = value.match(/^[0-9]{10}$/);
+        fieldValidationErrors.mobileno = mobilenoValid ? '' : 'Invalid Mobile number ';
+        break;
+
+        case 'batch':
+        batchValid = value.match(/^\d{4}$/);
+        fieldValidationErrors.batch = batchValid ? '' : ' *Please enter your batch';
+        break; 
+        
+        case 'city':
+        cityValid = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.city = cityValid ? '' : ' *Please enter your branch';
+        break;
+
+        case 'password':
+          passwordValid = value.match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+          fieldValidationErrors.password = passwordValid ? '' : "*Please enter secure and strong password."
+          break;   
+          
+          case 'cnfpassword':  
+          if(this.state.cnfpassword != this.state.password){
+            fieldValidationErrors.cnfpassword ="* password do not match.";
+            cnfpasswordValid=false;
+          }
+          else{
+            fieldValidationErrors.cnfpassword='';
+            cnfpasswordValid=true;
+          }
+          break;
+
+        default:
+        break;
     }
-    validateForm() {
-
-        let fields = this.state.fields;
-        let errors = {};
-        let formIsValid = true;
-
-        if (!fields["firstname"]) {
-            formIsValid = false;
-            errors["firstname"] = "*Please enter your firstname.";
-        }
-
-        if (typeof fields["firstname"] !== "undefined") {
-            if (!fields["firstname"].match(/^[a-zA-Z ]*$/)) {
-                formIsValid = false;
-                errors["firstname"] = "*Please enter alphabet characters only.";
-            }
-        }
-
-        if (!fields["lastname"]) {
-            formIsValid = false;
-            errors["lastname"] = "*Please enter your lastname.";
-        }
-
-        if (typeof fields["firstname"] !== "undefined") {
-            if (!fields["firstname"].match(/^[a-zA-Z ]*$/)) {
-                formIsValid = false;
-                errors["firstname"] = "*Please enter alphabet characters only.";
-            }
-        }
-
-        if (!fields["emailid"]) {
-            formIsValid = false;
-            errors["emailid"] = "*Please enter your email-ID.";
-        }
-
-        if (typeof fields["emailid"] !== "undefined") {
-            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(fields["emailid"])) {
-                formIsValid = false;
-                errors["emailid"] = "*Please enter valid email-ID.";
-            }
-        }
-
-        if (!fields["college"]) {
-            formIsValid = false;
-            errors["college"] = "*Please enter your college";
-        }
-
-        if (typeof fields["college"] !== "undefined") {
-            if (!fields["college"].match(/^[a-zA-Z ]*$/)) {
-                formIsValid = false;
-                errors["college"] = "*Please enter alphabet characters only.";
-            }
-        }
-
-        if (!fields["branch"]) {
-            formIsValid = false;
-            errors["branch"] = "*Please enter your branch.";
-        }
-
-        if (typeof fields["branch"] !== "undefined") {
-            if (!fields["branch"].match(/^[a-zA-Z ]*$/)) {
-                formIsValid = false;
-                errors["branch"] = "*Please enter alphabet characters only.";
-            }
-        }
-
-        if (!fields["yearofpassing"]) {
-            formIsValid = false;
-            errors["yearofpassing"] = "*Please enter your year of passing.";
-        }
-
-        if (typeof fields["yearofpassing"] !== "undefined") {
-            if (!fields["yearofpassing"].match(/^\d{4}$/)) {
-                formIsValid = false;
-                errors["yearofpassing"] = "*Please enter year correctly.";
-            }
-        }
-
-
-        if (!fields["mobileno"]) {
-            formIsValid = false;
-            errors["mobileno"] = "*Please enter your mobile no.";
-        }
-
-        if (typeof fields["mobileno"] !== "undefined") {
-            if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
-                formIsValid = false;
-                errors["mobileno"] = "*Please enter valid mobile no.";
-            }
-        }
-
-        if (!fields["batch"]) {
-            formIsValid = false;
-            errors["batch"] = "*Please enter your batch.";
-        }
-
-        if (typeof fields["batch"] !== "undefined") {
-            if (!fields["batch"].match(/^\d{4}$/)) {
-                formIsValid = false;
-                errors["batch"] = "*Please enter alphabet characters only.";
-            }
-        }
-
-
-        if (!fields["city"]) {
-            formIsValid = false;
-            errors["city"] = "*Please enter your city.";
-        }
-
-        if (typeof fields["city"] !== "undefined") {
-            if (!fields["city"].match(/^[a-zA-Z ]*$/)) {
-                formIsValid = false;
-                errors["city"] = "*Please enter city.";
-            }
-        }
-
-        if (!fields["password"]) {
-            formIsValid = false;
-            errors["password"] = "*Please enter your password.";
-        }
-
-        if (typeof fields["password"] !== "undefined") {
-            debugger;
-            if (!fields["password"].match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
-                formIsValid = false;
-                errors["password"] = "*Please enter secure and strong password.";
-            }
-        }
-
-        if (!fields["confirmpassword"]) {
-            formIsValid = false;
-            errors["confirmpassword"] = "*Please enter your Confirm password.";
-        }
-
-        if (typeof fields["confirmpassword"] !== "undefined") {
-            debugger;
-            if (fields["confirmpassword"] !== fields["password"]) {
-                formIsValid = false;
-                errors["password"] = "*Passwords do not match.";
-            }
-        }
-        this.setState({
-            errors: errors
-        });
-        return formIsValid;
+    this.setState({
+      formErrors: fieldValidationErrors,
+      firstnameValid: firstnameValid,
+      lastnameValid: lastnameValid,
+      emailValid: emailValid,
+      collegeValid:collegeValid,
+      branchValid:branchValid,
+      yearValid:yearValid,
+      mobilenoValid:mobilenoValid,
+      batchValid:batchValid,
+      cityValid:cityValid,
+      passwordValid:passwordValid,
+      cnfpasswordValid:cnfpasswordValid
+    }, this.validateForm);
+  }
+  validateForm() {
+    this.setState({ formValid: this.state.firstnameValid && this.state.lastnameValid && this.state. emailValid && this.state.collegeValid && this.state.branchValid && this.state.yearValid && this.state.mobilenoValid && this.state.batchValid && this.state.cityValid && this.state.passwordValid && this.state.cnfpasswordValid});
+  }
+  errorClass(error) {
+    if (error) {
+      return (error.length === 0 ? '' : 'brder-red');
     }
-    render() {
-        return (
-            <div className="container">
-            <center><img src={logo} className="align" alt="logo"/></center>
-            <div className="div-align">
-                <h3>Registration page</h3>
-                <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
-                    <label>First Name</label>
-                    <input type="text" name="firstname" value={this.state.fields.firstname} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.firstname}</div>
-
-                    <label>Last Name</label>
-                    <input type="text" name="lastname" value={this.state.fields.lastname} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.lastname}</div>
-
-                    <label>Email ID:</label>
-                    <input type="text" name="emailid" value={this.state.fields.emailid} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.emailid}</div>
-
-                    <label>College</label>
-                    <input type="text" name="college" value={this.state.fields.college} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.college}</div>
-
-                    <label>Branch</label>
-                    <input type="text" name="branch" value={this.state.fields.branch} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.branch}</div>
-
-                    <label>Year of Passing</label>
-                    <input type="number" name="yearofpassing" value={this.state.fields.yearofpassing} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.yearofpassing}</div>
-
-                    <label>Mobile No:</label>
-                    <input type="number" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.mobileno}</div>
-
-                    <label>Batch</label>
-                    <input type="number" name="batch" value={this.state.fields.batch} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.batch}</div>
-
-                    <label>City</label>
-                    <input type="text" name="city" value={this.state.fields.city} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.city}</div>
-
-                    <label>Password</label>
-                    <input type="password" name="password" value={this.state.fields.password} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.password}</div>
-
-                    <label>Confirm Password</label>
-                    <input type="password" name="confirmpassword" value={this.state.fields.confirmpassword} onChange={this.handleChange} />
-                    <div className="errorMsg">{this.state.errors.confirmpassword}</div>
-
-                    <input type="submit" className="button" value="Register" />
-                </form>
-            </div>
-            </div>
-        );
+    else {
+      return ('');
     }
+
+  }
+
+  submituserRegistrationForm(e) {
+    e.preventDefault();
+    const SignupDetails ={
+      firstname:this.state.firstname,
+      lastname :this.state.lastname,
+      email : this.state.email,
+      college :this.state.college,
+      branch :this.state.branch,
+      year:this.state.year,
+      mobileno:this.state.mobileno,
+      batch : this.state.batch,
+      city :this.state.city,
+      password :this.state.password,
+      cnfpassword :this.state.cnfpassword
+    }
+    this.props.submitSignup(SignupDetails);
+  }
+
+  render() {
+    return (
+      <div className="container">
+       <center><img src={logo} className="align" alt="logo"/></center>
+      <div className="div-align">
+        <h3>Registration page</h3>
+        <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
+          <label><span className="errorMsg">*</span> First Name</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.firstname)}`}
+            name="firstname"
+            value={this.state.firstname}
+            onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.firstname}</div>
+          <label><span className="errorMsg">*</span> Last Name</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.lastname)}`} name="lastname" value={this.state.lastname} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.lastname}</div>
+
+          <label><span className="errorMsg">*</span> Email</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.email)}`} name="email" value={this.state.email} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.email}</div>
+
+          <label><span className="errorMsg">*</span> college</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.college)}`} name="college" value={this.state.college} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.college}</div>
+
+          <label><span className="errorMsg">*</span> Branch</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.branch)}`} name="branch" value={this.state.branch} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.branch}</div>
+
+          <label><span className="errorMsg">*</span> Year Of Passing</label>
+          <input type="number" required className={` ${this.errorClass(this.state.formErrors.year)}`} name="year" value={this.state.year} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.year}</div>
+
+          <label>Mobile Number:</label>
+            <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
+            <div className="errorMsg">{this.state.formErrors.mobileno}</div>
+
+              <label><span className="errorMsg">*</span> Batch</label>
+          <input type="number" required className={` ${this.errorClass(this.state.formErrors.batch)}`} name="batch" value={this.state.batch} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.batch}</div>
+
+          <label><span className="errorMsg">*</span> City</label>
+          <input type="text" required className={` ${this.errorClass(this.state.formErrors.city)}`} name="city" value={this.state.city} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.city}</div>
+          
+            <label><span className="errorMsg">*</span>Password</label>
+            <input type="password" required className={`${this.errorClass(this.state.formErrors.password)}`} name="password" value={this.state.password} onChange={this.handleChange} />
+            <div className="errorMsg">{this.state.formErrors.passwordValid}</div>
+
+            <label><span className="errorMsg">*</span> Confirm Password</label>
+          <input type="password" required className={` ${this.errorClass(this.state.formErrors.cnfpassword)}`} name="cnfpassword" value={this.state.cnfpassword} onChange={this.handleChange} />
+          <div className="errorMsg">{this.state.formErrors.cnfpassword}</div>
+
+          <button type="submit" className="button" value="Register" disabled={!this.state.formValid}>Signup</button>
+        </form>
+      </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
-    debugger;
-    const { error } = state.SignupReducers;
-    return { error };
+  const { error } = state.SignupReducers;
+  return { error };
 };
 
 export default withRouter(connect(mapStateToProps, { submitSignup })(Signup));
+

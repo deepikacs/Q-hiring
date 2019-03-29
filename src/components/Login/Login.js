@@ -55,7 +55,7 @@ class Login extends Component {
     return (
       <React.Fragment>
         <center><img src={logo} className="padding-top" alt="logo"/></center>
-        <div className="div-align">
+        <div className="div-align-login">
         <center><h3>Login page</h3></center>
         <form method=""  name=""  onSubmit= {this.submituserLoginForm} >
         

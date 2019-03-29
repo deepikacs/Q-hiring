@@ -1,0 +1,18 @@
+.dot {
+    height: 75px;
+    width:75px;
+    background-color: #ab2525;
+    border-radius: 50%;
+    display: inline-block;
+    float: right !important;
+    text-align: center;
+    color: white;   
+  }
+
+.padding-top {
+    padding-top: 25px;
+}
+
+.padding-top11{
+  padding-top: 11px;
+}
