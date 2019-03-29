@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../Images/qwinix.png';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { Question } from '../../Actions/QuestionAction';
-import { selectedOptionsDetails } from '../../Actions/SelectedOptionAction';
+import { Question,AddOptionsDetails } from '../../Actions/QuestionAction';
 
 import './Main.css';
 
@@ -55,18 +54,30 @@ class Main extends Component {
   }
   else{
     this.state.answerArray.push(data);
-  }  
+  } 
+  this.setState({answerArray:this.state.answerArray}); 
     console.log(this.state.answerArray)
     
   }
 
   handleSubmit = () =>{
-    this.setState({answerArray:this.state.answerArray});
+    debugger;
+    
+
+   
+    // this.setState({answerArray:this.state.answerArray});
+    var userid=localStorage.getItem('userid');
+    console.log(userid);
     const selectedOptions={
-      questionid:this.state.answerArray.questionid,
-      optionid:this.state.answerArray.optionid
+      userid:localStorage.getItem('userid'),
+      questionAnswer:this.state.answerArray,
     };
-    this.props.selectedOptionsDetails(selectedOptions);
+    if(this.state.answerArray.length>0){
+    this.props.AddOptionsDetails(selectedOptions);
+  }
+  else{
+    alert("please select atleast one answer");
+  }
 
   }
 
@@ -98,10 +109,10 @@ class Main extends Component {
              {item.answers.map((ans,index) =>
              (
                 <div className="lineHeight">
-                <input type="radio" name={ans.question} 
+                <input type="radio" name={ans.questionid} 
                 value= {ans._id} key={index} 
 
-                onChange={this.handleAnswer.bind(this,index,ans._id,ans.question)}
+                onChange={this.handleAnswer.bind(this,index,ans._id,ans.questionid)}
                 /> {ans.anstext}
                 </div>
              ))}
@@ -116,10 +127,10 @@ class Main extends Component {
           <div className='col-sm-6'>
           </div>
           <div className='col-sm-1'>
-            <p className="dot paddTop-25" onClick={this.handleSubmit}>Submit</p>
+            <p className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray>0}>Submit</p>
           </div>
         </div>
-
+          <div>name:{this.props.optionDetails}</div>
         </div>
         
 
@@ -129,9 +140,9 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   debugger;
-  const { error ,questionDetails} = state.QuestionReducers;
+  const { error,questionDetails,optionDetails} = state.QuestionReducers;
   // const {optionDetails} = state.SelectedOptionReducers;
-  return { error,questionDetails};
+  return { error,questionDetails,optionDetails};
 };
 
-export default withRouter(connect(mapStateToProps, { Question ,selectedOptionsDetails})(Main));
+export default withRouter(connect(mapStateToProps, { Question ,AddOptionsDetails})(Main));

@@ -28,7 +28,11 @@ export function submitLogin(logindata) {
       debugger;
         console.log(response)
           dispatch(SuccessFunc(ActionTypes.FETCH_LOGIN_SUCCESS,response.data));
+          debugger;
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userid',response.data.userId);
+          console.log(response.data.userId)
+
           browserHistory.push('/instruction');
         })
         

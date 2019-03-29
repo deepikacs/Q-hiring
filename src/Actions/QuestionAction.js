@@ -36,3 +36,24 @@ export function Question() {
         });
     };
   }
+
+  export function AddOptionsDetails(selectedoption) {
+    debugger;
+    return dispatch => {
+      dispatch(BeginFunc(ActionTypes. ADD_SELECTED_OPTION_BEGIN ));
+      debugger;
+      HttpWrapper('POST', '/userquestions/addall', true,selectedoption)
+        .then(response => {
+      debugger;
+        console.log(response)
+          dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS,response.data));
+          browserHistory.push('/thankyou');
+
+        })
+        
+        .catch(error => {
+          debugger;
+          dispatch(ErrorFunc(ActionTypes.ADD_SELECTED_OPTION_FAILURE,error));
+        });
+    };
+  }
