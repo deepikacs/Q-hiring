@@ -52,7 +52,7 @@ class Login extends Component {
   }
 
   validateForm() {
-    this.setState({ formValid: this.state.mobilenoValid  });
+    this.setState({ formValid: this.state.mobilenoValid });
   }
 
   errorClass(error) {
@@ -66,14 +66,7 @@ class Login extends Component {
 
   submituserLoginForm(e) {
     e.preventDefault();
-    debugger;
-
-    // let fields = this.state.fields;
-
-    // const loginDetails = { mobileno: fields["mobileno"], password: fields["password"] };
-    // this.props.submitLogin(loginDetails);
-
-    const loginDetails ={mobileno:this.state.mobileno,password:this.state.password};
+    const loginDetails = { mobileno: this.state.mobileno, password: this.state.password };
     this.props.submitLogin(loginDetails);
   }
 
@@ -97,8 +90,7 @@ class Login extends Component {
 
             <input type="submit" className="button" value="Register" disabled={!this.state.formValid} />
           </form>
-         {/* <center><div className="errorMsg">{this.props.error}</div></center>  */}
-         <center><div className="errorMsg">{this.props.message}</div></center> 
+          <center><div className="errorMsg">{this.props.message}</div></center>
         </div>
 
 
@@ -110,7 +102,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  debugger;
   const { error, message } = state.LoginReducers;
   return { error, message };
 };

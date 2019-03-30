@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import logo from '../../Images/qwinix.png';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { Question,AddOptionsDetails } from '../../Actions/QuestionAction';
-
+import { Question, AddOptionsDetails } from '../../Actions/QuestionAction';
 import './Main.css';
 
 class Main extends Component {
   constructor(props) {
     super(props)
-    this.state = { 
+    this.state = {
       count: 60,
-      checked:'',
-      answerArray:[],
+      checked: '',
+      answerArray: [],
 
     }
   }
@@ -20,7 +19,6 @@ class Main extends Component {
     clearInterval(this.timer);
   }
   componentDidMount() {
-    debugger;
     this.startTimer();
     this.props.Question();
   }
@@ -34,57 +32,49 @@ class Main extends Component {
   stopTimer() {
     clearInterval(this.timer)
   }
-  handleAnswer=(index,ansid,qid)=>{
-    debugger;
-    this.setState({checked:index});
+  handleAnswer = (index, ansid, qid) => {
+    this.setState({ checked: index });
     console.log(this.state.checked);
-    const data={
-      optionid:ansid,
-      questionid:qid
+    const data = {
+      optionid: ansid,
+      questionid: qid
     };
-  
-  if( this.state.answerArray.length>0){
-    const index1 = this.state.answerArray.findIndex((res) => res.questionid === qid);
-    if(index1 != -1){
-      this.state.answerArray[index1]['optionid']=ansid;
+
+    if (this.state.answerArray.length > 0) {
+      const index1 = this.state.answerArray.findIndex((res) => res.questionid === qid);
+      if (index1 != -1) {
+        this.state.answerArray[index1]['optionid'] = ansid;
+      }
+      else {
+        this.state.answerArray.push(data);
+      }
     }
-    else{
+    else {
       this.state.answerArray.push(data);
     }
-  }
-  else{
-    this.state.answerArray.push(data);
-  } 
-  this.setState({answerArray:this.state.answerArray}); 
-    console.log(this.state.answerArray)
-    
+    this.setState({ answerArray: this.state.answerArray });
+
   }
 
-  handleSubmit = () =>{
-    debugger;
-    
-
-   
-    // this.setState({answerArray:this.state.answerArray});
-    var userid=localStorage.getItem('userid');
-    console.log(userid);
-    const selectedOptions={
-      userid:localStorage.getItem('userid'),
-      questionAnswer:this.state.answerArray,
+  handleSubmit = () => {
+    var userid = localStorage.getItem('userid');
+    const selectedOptions = {
+      userid: localStorage.getItem('userid'),
+      questionAnswer: this.state.answerArray,
     };
-    if(this.state.answerArray.length>0){
-    this.props.AddOptionsDetails(selectedOptions);
-  }
-  else{
-    alert("please select atleast one answer");
-  }
+    if (this.state.answerArray.length > 0) {
+      this.props.AddOptionsDetails(selectedOptions);
+    }
+    else {
+      alert("please select atleast one answer");
+    }
 
   }
 
 
   render() {
     return (
-       <div className="fluid-container hrztle-scrl"> 
+      <div className="fluid-container hrztle-scrl">
         <div className='row'>
           <div className='col-sm-5'></div>
           <div className='col-sm-6'>
@@ -95,30 +85,30 @@ class Main extends Component {
           </div>
         </div>
         <div className='row'>
-        <div className='col-sm-5'></div>
-        <div className='col-sm-6 paddLeft-41'> <h2>Verbal Test</h2></div>
-        <div className='col-sm-1'></div>
-       
-        </div> 
+          <div className='col-sm-5'></div>
+          <div className='col-sm-6 paddLeft-41'> <h2>Verbal Test</h2></div>
+          <div className='col-sm-1'></div>
+
+        </div>
         <div>
-        {this.props.questionDetails.map((item,index)=>
-        (
-            <div className="paddleft-115" ><span className="text-bold">{index+1}.  {item.questtext}</span>
+          {this.props.questionDetails.map((item, index) =>
+            (
+              <div className="paddleft-115" ><span className="text-bold">{index + 1}.  {item.questtext}</span>
 
-        
-             {item.answers.map((ans,index) =>
-             (
-                <div className="lineHeight">
-                <input type="radio" name={ans.questionid} 
-                value= {ans._id} key={index} 
 
-                onChange={this.handleAnswer.bind(this,index,ans._id,ans.questionid)}
-                /> {ans.anstext}
-                </div>
-             ))}
-         
-         </div>
-        ))}
+                {item.answers.map((ans, index) =>
+                  (
+                    <div className="lineHeight">
+                      <input type="radio" name={ans.questionid}
+                        value={ans._id} key={index}
+
+                        onChange={this.handleAnswer.bind(this, index, ans._id, ans.questionid)}
+                      /> {ans.anstext}
+                    </div>
+                  ))}
+
+              </div>
+            ))}
         </div>
 
         {/* last */}
@@ -127,22 +117,17 @@ class Main extends Component {
           <div className='col-sm-6'>
           </div>
           <div className='col-sm-1'>
-            <p className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray>0}>Submit</p>
+            <p className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</p>
           </div>
         </div>
-          <div>name:{this.props.optionDetails}</div>
-        </div>
-        
-
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  debugger;
-  const { error,questionDetails,optionDetails} = state.QuestionReducers;
-  // const {optionDetails} = state.SelectedOptionReducers;
-  return { error,questionDetails,optionDetails};
+  const { error, questionDetails, optionDetails } = state.QuestionReducers;
+  return { error, questionDetails, optionDetails };
 };
 
-export default withRouter(connect(mapStateToProps, { Question ,AddOptionsDetails})(Main));
+export default withRouter(connect(mapStateToProps, { Question, AddOptionsDetails })(Main));

@@ -18,7 +18,6 @@ export default (state = INPUT_STATE, action) => {
     case ActionTypes.ADD_SELECTED_OPTION_BEGIN:
       return { ...state, loading: true, error: null };
     case ActionTypes.ADD_SELECTED_OPTION_SUCCESS:
-      debugger;
       return { ...state, loading: false, optionDetails: action.payload.message }
     case ActionTypes.ADD_SELECTED_OPTION_FAILURE:
       return { ...state, loading: false, error: action.payload.message }

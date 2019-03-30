@@ -14,7 +14,6 @@ export default (state = INPUT_STATE, action) => {
    console.log(action);
     return { ...state, loading: false,message:'logged in'}
   case ActionTypes.FETCH_LOGIN_FAILURE:
-  debugger;
     return { ...state, loading: false, error: action.payload.message}
   default:
     return state;
