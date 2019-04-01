@@ -75,7 +75,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     const {  error } = state.LoginReducers;
     return { error };
   };
