@@ -35,13 +35,16 @@ export function Question() {
 }
 
 export function AddOptionsDetails(selectedoption) {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(BeginFunc(ActionTypes.ADD_SELECTED_OPTION_BEGIN));
     HttpWrapper('POST', '/userquestions/addall', true, selectedoption)
       .then(response => {
         console.log(response)
+        
         dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS, response.data));
-        browserHistory.push('/thankyou');
+        console.log('after dospatch', getState())
+        debugger;
+        // browserHistory.push('/thankyou');
 
       })
 

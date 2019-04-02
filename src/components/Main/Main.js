@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { Question, AddOptionsDetails } from '../../Actions/QuestionAction';
 import './Main.css';
+import {Link } from 'react-router-dom';
+import Thankyou from './Thankyou';
 
 class Main extends Component {
   constructor(props) {
@@ -74,7 +76,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="fluid-container hrztle-scrl">
+      <div className="fluid-container horiztle-scrl">
         <div className='row'>
           <div className='col-sm-5'></div>
           <div className='col-sm-6'>
@@ -117,9 +119,13 @@ class Main extends Component {
           <div className='col-sm-6'>
           </div>
           <div className='col-sm-1'>
-            <p className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</p>
+          <Link to={"/thankyou"} className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</Link>
           </div>
         </div>
+        {/* <Link to={"/thankyou"}>Result</Link> */}
+        {/* <p>message={this.props.optionDetails}</p>  */}
+        {/* <Thankyou message={this.props.optionDetails} /> */}
+
       </div>
     );
   }
