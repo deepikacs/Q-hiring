@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './Signup.css';
 import { submitSignup } from '../../Actions/SignupAction';
-import logo from '../image/logo.png';
+import logo from '../../Images/logo.png';
+
 
 class Signup extends Component {
 
@@ -178,7 +179,7 @@ class Signup extends Component {
   render() {
     return (
       <div className="container">
-       <center><img src={logo} className="align" alt="logo"/></center>
+       <center><img src={logo} alt="logo"/></center>
       <div className="div-align">
         <h3>Registration page</h3>
         <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
@@ -188,6 +189,7 @@ class Signup extends Component {
             value={this.state.firstname}
             onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.firstname}</div>
+
           <label><span className="errorMsg">*</span> Last Name</label>
           <input type="text" required className={` ${this.errorClass(this.state.formErrors.lastname)}`} name="lastname" value={this.state.lastname} onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.lastname}</div>
@@ -211,15 +213,15 @@ class Signup extends Component {
           <label>Mobile Number:</label>
             <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.mobileno}</div>
-
               <label><span className="errorMsg">*</span> Batch</label>
+
           <input type="number" required className={` ${this.errorClass(this.state.formErrors.batch)}`} name="batch" value={this.state.batch} onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.batch}</div>
 
           <label><span className="errorMsg">*</span> City</label>
           <input type="text" required className={` ${this.errorClass(this.state.formErrors.city)}`} name="city" value={this.state.city} onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.city}</div>
-          
+
             <label><span className="errorMsg">*</span>Password</label>
             <input type="password" required className={`${this.errorClass(this.state.formErrors.password)}`} name="password" value={this.state.password} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.passwordValid}</div>

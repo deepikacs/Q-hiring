@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import LoginReducers from './LoginReducers';
 import SignupReducers from './SignupReducers';
-import QuestionsReducers from './QuestionsReducers';
+import QuestionReducers from './QuestionReducers';
+// import SelectedOptionReducer from './SelectedOptionReducers';
 
 export default combineReducers({
   LoginReducers,
   SignupReducers,
-  QuestionsReducers
+  QuestionReducers
 });

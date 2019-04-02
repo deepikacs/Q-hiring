@@ -24,7 +24,12 @@ class Instruction extends Component {
   }
 
   handleNavigate = () => {
-    browserHistory.push('/IndexPage');
+    browserHistory.push('/main');
+  }
+
+  logout = () => {
+    localStorage.clear();
+    browserHistory.push('/');
   }
 
   render() {
@@ -61,6 +66,7 @@ class Instruction extends Component {
           </div>
           <button type="text" onClick={this.handleOpenModal}>Next</button>
         </div>
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"
@@ -73,7 +79,6 @@ class Instruction extends Component {
               <div className="col-sm-2"></div>
               <div className="col-sm-8"><h6 className="margin-top">You are about to start your test</h6></div>
               <div className="col-sm-2 margin-top close" onClick={this.handleCloseModal} ></div>
-
             </div>
             <div className="row mr-top-67">
               <div className="col-sm-2">
@@ -101,7 +106,7 @@ class Instruction extends Component {
             </div>
           </div>
         </ReactModal>
-      </div>
+      </div >
 
     );
   }

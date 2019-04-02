@@ -3,21 +3,21 @@ import HttpWrapper from '../utils/HttpWrapper';
 import browserHistory from '../utils/browserHistory';
 
 export function BeginFunc(ActionType) {
-    return { type: ActionType }
+  return { type: ActionType }
 }
 
 export function SuccessFunc(ActionType, result) {
-    return {
-        type: ActionType,
-        payload: result
-    }
+  return {
+    type: ActionType,
+    payload: result
+  }
 }
 
 export function ErrorFunc(ActionType, error) {
-    return {
-        type: ActionType,
-        payload: { error }
-    }
+  return {
+    type: ActionType,
+    payload: { error }
+  }
 }
 
 export function submitSignup(userdata) {
@@ -25,14 +25,12 @@ export function submitSignup(userdata) {
       dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN ));
       HttpWrapper('POST', '/api/user/signup', false, userdata)
         .then(response => {
-            debugger;
-            console.log(response)
           dispatch(SuccessFunc(ActionTypes.ADD_SIGNUP_SUCCESS,response.data));
           browserHistory.push('/login');
         })
         .catch(error => {
-          debugger;
           dispatch(ErrorFunc(ActionTypes.ADD_SIGNUP_FAILURE,error));
         });
     };
   }
+
