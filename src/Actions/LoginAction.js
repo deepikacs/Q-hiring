@@ -22,6 +22,8 @@ export function ErrorFunc(ActionType, error) {
 
 export function submitLogin(logindata) {
   return dispatch => {
+    debugger;
+
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
     HttpWrapper('POST', '/user/login', false, logindata)
       .then(response => {

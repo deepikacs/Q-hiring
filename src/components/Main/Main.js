@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../Images/qwinix.png';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { Question, AddOptionsDetails } from '../../Actions/QuestionAction';
+import { Question, AddOptionsDetails, nextPage } from '../../Actions/QuestionAction';
 import './Main.css';
 import {Link } from 'react-router-dom';
 import Thankyou from './Thankyou';
@@ -73,8 +73,20 @@ class Main extends Component {
 
   }
 
+  showNextPage = () => {
+    debugger;
+    const { page, pagesNames, nextPage } = this.props;
+    const newPage = page + 1;
+    if(newPage < pagesNames.length){
+      nextPage(newPage);
+    }else{
+      nextPage(0);
+    }
+  }
+
 
   render() {
+    const {page, questionDetails, pagesNames} = this.props;
     return (
       <div className="fluid-container horiztle-scrl">
         <div className='row'>
@@ -86,19 +98,35 @@ class Main extends Component {
             <p className="dot paddTop-11">{this.state.count}<br />mins</p>
           </div>
         </div>
-        <div className='row'>
-          <div className='col-sm-5'></div>
-          <div className='col-sm-6 paddLeft-41'> <h2>Verbal Test</h2></div>
-          <div className='col-sm-1'></div>
-
-        </div>
+        
         <div>
-          {this.props.questionDetails.map((item, index) =>
-            (
-              <div className="paddleft-115" ><span className="text-bold">{index + 1}.  {item.questtext}</span>
+        {questionDetails.map((item, index) =>
+            {
+              if(pagesNames[page] === item.name){
+              return <div>
+              <div className='row'>
+              <div className='col-sm-5'></div>
+              <div className='col-sm-6 paddLeft-41'> <h2>{item.name}</h2></div>
+              <div className='col-sm-1'></div>
+    
+            </div> 
+              {item.questions.map((qns,index)=>(
+                <div className="paddleft-115 text-bold">{index + 1}. {qns.questtext}
+                {qns.options.map((opt,index)=>
+                (
+                  <div className="lineHeight">
+                  <input type="radio" name={opt.questionid}
+                    value={opt._id} key={index}
 
+                    onChange={this.handleAnswer.bind(this, index, opt._id, opt.questionid)}
+                  /> {opt.anstext}
+                </div> 
+                ))}
+                </div>
+              ))}
+              <button onClick={this.showNextPage}>Next</button>
 
-                {item.answers.map((ans, index) =>
+                {/* {item.questions.map((ans, index) =>
                   (
                     <div className="lineHeight">
                       <input type="radio" name={ans.questionid}
@@ -107,10 +135,12 @@ class Main extends Component {
                         onChange={this.handleAnswer.bind(this, index, ans._id, ans.questionid)}
                       /> {ans.anstext}
                     </div>
-                  ))}
+                  ))} */}
 
+              {/* </div> */}
               </div>
-            ))}
+            }
+        })}
         </div>
 
         {/* last */}
@@ -132,8 +162,8 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { error, questionDetails, optionDetails } = state.QuestionReducers;
-  return { error, questionDetails, optionDetails };
+  const { error, questionDetails, optionDetails, page, pagesNames } = state.QuestionReducers;
+  return { error, questionDetails, optionDetails, page, pagesNames };
 };
 
-export default withRouter(connect(mapStateToProps, { Question, AddOptionsDetails })(Main));
+export default withRouter(connect(mapStateToProps, { Question, AddOptionsDetails, nextPage })(Main));

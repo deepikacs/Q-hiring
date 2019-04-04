@@ -22,7 +22,7 @@ export function ErrorFunc(ActionType, error) {
 export function Question() {
   return dispatch => {
     dispatch(BeginFunc(ActionTypes.FETCH_QUESTION_BEGIN));
-    HttpWrapper('GET', '/question/getAllwithoptions', true)
+    HttpWrapper('GET', '/group/getall', true)
       .then(response => {
         console.log(response)
         dispatch(SuccessFunc(ActionTypes.FETCH_QUESTION_SUCCESS, response.data));
@@ -53,3 +53,14 @@ export function AddOptionsDetails(selectedoption) {
       });
   };
 }
+
+export const nextPage = (page) => (dispatch) => {
+  debugger
+  dispatch({
+    type: ActionTypes.NEXT_PAGE,
+    page
+  })
+}
+
+// for groups
+
