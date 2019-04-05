@@ -21,3 +21,8 @@
 .img-align{
     height: 70px;
   }
+
+.padding-left-120 {
+  padding-left: 120px;
+  line-height: 3em;
+}

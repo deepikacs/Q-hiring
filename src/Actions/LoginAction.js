@@ -25,10 +25,9 @@ export function submitLogin(logindata) {
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
     HttpWrapper('POST', '/api/user/login', false, logindata)
       .then(response => {
-        console.log(response)
+        debugger
+        console.log(logindata);
         dispatch(SuccessFunc(ActionTypes.FETCH_LOGIN_SUCCESS, response.data));
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userid', response.data.userId);
         browserHistory.push('/Instruction');
       })
       .catch(error => {

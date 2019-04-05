@@ -34,7 +34,6 @@ class Main extends Component {
   }
   handleAnswer = (index, answerid, questionid) => {
     this.setState({ checked: index });
-    console.log(this.state.checked);
     const data = {
       optionid: answerid,
       questionid: questionid
@@ -57,7 +56,6 @@ class Main extends Component {
   }
 
   handleSubmit = () => {
-    var userid = localStorage.getItem('userid');
     const selectedOptions = {
       userid: localStorage.getItem('userid'),
       questionAnswer: this.state.answerArray,
@@ -74,8 +72,8 @@ class Main extends Component {
   render() {
     return (
       <div className="fluid-container">
-      <p className="display-position padding-top11">{this.state.count}<br />mins</p>
-      <center><img src={logo} alt="logo" className="img-align"/></center>
+        <p className="display-position padding-top11">{this.state.count}<br />mins</p>
+        <center><img src={logo} alt="logo" className="img-align" /></center>
         <div className='row'>
           <div className='col-sm-5'></div>
           <div className='col-sm-6'>
@@ -87,26 +85,25 @@ class Main extends Component {
           <div className='col-sm-5'></div>
           <div className='col-sm-6 paddLeft-41'> <h2>Verbal Test</h2></div>
           <div className='col-sm-1'></div>
-
         </div>
         <div>
           {this.props.questionDetails.map((item, index) =>
             (
-              <div><span className="text-bold">{index + 1}.  {item.questtext}</span>
+              <div className="padding-left-120"
+              ><span className="text-bold">{index + 1}.  {item.questtext}</span>
                 {item.answers.map((ans, index) =>
                   (
                     <div className="lineHeight">
                       <input type="radio" name={ans.questionid}
                         value={ans._id} key={index}
-
                         onChange={this.handleAnswer.bind(this, index, ans._id, ans.questionid)}
                       /> {ans.anstext}
                     </div>
                   ))}
-
               </div>
             ))}
         </div>
+        <br/>
         <div className='row'>
           <div className='col-sm-5'></div>
           <div className='col-sm-6'>
