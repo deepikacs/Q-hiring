@@ -26,3 +26,15 @@
   padding-left: 120px;
   line-height: 3em;
 }
+
+  .horiztle-scrl{
+      overflow:hidden;
+  }
+  .paddLeft-41{
+    padding-left: 41px;
+  }
+  .textAlign{
+    margin-top: 20%;
+    color: blue;
+  }
+

@@ -22,7 +22,7 @@ export function ErrorFunc(ActionType, error) {
 export function Question() {
   return dispatch => {
     dispatch(BeginFunc(ActionTypes.FETCH_QUESTION_BEGIN));
-    HttpWrapper('GET', '/api/question/getAllwithoptions', true)
+    HttpWrapper('GET', '/group/getall', true)
       .then(response => {
         dispatch(SuccessFunc(ActionTypes.FETCH_QUESTION_SUCCESS, response.data));
       })
@@ -33,15 +33,29 @@ export function Question() {
 }
 
 export function AddOptionsDetails(selectedoption) {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(BeginFunc(ActionTypes.ADD_SELECTED_OPTION_BEGIN));
     HttpWrapper('POST', '/api/userquestions/addall', true, selectedoption)
       .then(response => {
+        console.log(response)
+        
         dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS, response.data));
-        browserHistory.push('/thankyou');
+        // console.log('after dospatch', getState())
+        debugger;
+        // browserHistory.push('/thankyou');
       })
       .catch(error => {
         dispatch(ErrorFunc(ActionTypes.ADD_SELECTED_OPTION_FAILURE, error));
       });
   };
 }
+
+export const nextPage = (page) => (dispatch) => {
+  debugger
+  dispatch({
+    type: ActionTypes.NEXT_PAGE,
+    page
+  })
+}
+
+
