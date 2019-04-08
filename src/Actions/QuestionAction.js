@@ -42,7 +42,7 @@ export function AddOptionsDetails(selectedoption) {
         console.log(response)
         
         dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS, response.data));
-        console.log('after dospatch', getState())
+        // console.log('after dospatch', getState())
         debugger;
         // browserHistory.push('/thankyou');
 
