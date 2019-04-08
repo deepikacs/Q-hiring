@@ -35,7 +35,7 @@ export function Question() {
 export function AddOptionsDetails(selectedoption) {
   return (dispatch, getState) => {
     dispatch(BeginFunc(ActionTypes.ADD_SELECTED_OPTION_BEGIN));
-    HttpWrapper('POST', '/api/userquestions/addall', true, selectedoption)
+    HttpWrapper('POST', '/userquestions/addall', true, selectedoption)
       .then(response => {
         console.log(response)
         

@@ -25,7 +25,7 @@ export function submitLogin(logindata) {
     debugger;
 
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
-    HttpWrapper('POST', '/api/user/login', false, logindata)
+    HttpWrapper('POST', '/user/login', false, logindata)
       .then(response => {
         debugger
         console.log(logindata);
