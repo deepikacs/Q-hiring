@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import browserHistory from '../../utils/browserHistory';
 import './Instruction.css';
+import { Link } from 'react-router-dom';
 
 class Instruction extends Component {
   constructor() {
@@ -34,37 +35,37 @@ class Instruction extends Component {
   render() {
     return (
       <div className="container">
-
-        <h3>Instruction</h3>
-        <center onClick={this.logout}>Logout</center>
+        <h3><b>Instructions:</b></h3>
+        <Link to="/" className="button">Logout</Link>
         <div className="card red">
-          <div className="card-body">Basic card</div>
+          <div className="card-body">Duration of the test - 60 mins. After 60 mins your answers will be auto submitted.</div>
         </div>
         <br />
-        <div className="card ">
-          <div className="card-body">Primary card</div>
+        <div className="card green ">
+          <div className="card-body">Total number of questions - 60. 20 questions each in 3 sections of Verbal, Logical and Aptitude (in the same order).</div>
         </div>
         <br />
-        <div className="card bg-success text-white">
-          <div className="card-body">Success card</div>
+        <div className="card yellow">
+          <div className="card-body">Cannot Switch between Sections. Finish one to attend the next.</div>
         </div>
         <br />
-        <div className="card bg-info text-white">
-          <div className="card-body">Info card</div>
+        <div className="card pink">
+          <div className="card-body">Do not refresh or press back key. If done, new questions will be presented with a penalty of 2 mins time.</div>
         </div>
         <br />
-        <div className="card bg-warning text-white">
-          <div className="card-body">Warning card</div>
+        <div className="card purple">
+          <div className="card-body">If the application is not accessible, notify the invigilator in your room./div>
         </div>
-        <br />
-        <div className="card bg-danger text-white">
-          <div className="card-body">Danger card</div>
+          <br />
+          <div className="card green">
+            <div className="card-body">No negative marking.</div>
+          </div>
+          <br />
+          <div className="card red">
+            <div className="card-body">Submission on each section - Once answers for a section is submitted you cannot revisit that section.</div>
+          </div>
+          <button type="text" onClick={this.handleOpenModal}>Next</button>
         </div>
-        <br />
-        <div className="card bg-secondary text-white">
-          <div className="card-body">Secondary card</div>
-        </div>
-        <button type="text" onClick={this.handleOpenModal}>Next</button>
 
         <ReactModal
           isOpen={this.state.showModal}
@@ -76,9 +77,8 @@ class Instruction extends Component {
           <div className="container">
             <div className="row " >
               <div className="col-sm-2"></div>
-              <div className="col-sm-8"><h6 className="marg-top">You are about to start your test</h6></div>
-              <div className="col-sm-2 marg-top close" onClick={this.handleCloseModal} ></div>
-
+              <div className="col-sm-8"><h6 className="margin-top">You are about to start your test</h6></div>
+              <div className="col-sm-2 margin-top close" onClick={this.handleCloseModal} ></div>
             </div>
             <div className="row mr-top-67">
               <div className="col-sm-2">
@@ -104,11 +104,9 @@ class Instruction extends Component {
               </div>
               <div className="col-sm-2"></div>
             </div>
-
-
           </div>
         </ReactModal>
-      </div>
+      </div >
 
     );
   }
