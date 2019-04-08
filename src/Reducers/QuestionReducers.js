@@ -36,4 +36,3 @@ export default (state = INPUT_STATE, action) => {
       return state;
   }
 };
-
