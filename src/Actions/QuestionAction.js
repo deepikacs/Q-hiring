@@ -24,8 +24,10 @@ export function Question() {
     dispatch(BeginFunc(ActionTypes.FETCH_QUESTION_BEGIN));
     HttpWrapper('GET', '/group/getall', true)
       .then(response => {
+        console.log(response)
         dispatch(SuccessFunc(ActionTypes.FETCH_QUESTION_SUCCESS, response.data));
       })
+
       .catch(error => {
         dispatch(ErrorFunc(ActionTypes.FETCH_QUESTION_FAILURE, error));
       });
@@ -40,10 +42,12 @@ export function AddOptionsDetails(selectedoption) {
         console.log(response)
         
         dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS, response.data));
-        // console.log('after dospatch', getState())
+        console.log('after dospatch', getState())
         debugger;
         // browserHistory.push('/thankyou');
+
       })
+
       .catch(error => {
         dispatch(ErrorFunc(ActionTypes.ADD_SELECTED_OPTION_FAILURE, error));
       });
@@ -58,4 +62,4 @@ export const nextPage = (page) => (dispatch) => {
   })
 }
 
-
+// for groups

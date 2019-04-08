@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 import './Signup.css';
-import { submitSignup } from '../../Actions/SignupAction';
-import logo from '../../Images/logo.png';
-
+import { submitSignup } from '../../Actions/SignupAction'
 
 class Signup extends Component {
 
@@ -35,6 +33,7 @@ class Signup extends Component {
       cityValid:false,
       passwordValid:false,
       cnfpasswordValid:false,
+
       formValid: false,
     }
 
@@ -116,7 +115,8 @@ class Signup extends Component {
           fieldValidationErrors.password = passwordValid ? '' : "*Please enter secure and strong password."
           break;   
           
-          case 'cnfpassword':  
+          case 'cnfpassword':
+          
           if(this.state.cnfpassword != this.state.password){
             fieldValidationErrors.cnfpassword ="* password do not match.";
             cnfpasswordValid=false;
@@ -143,6 +143,7 @@ class Signup extends Component {
       cityValid:cityValid,
       passwordValid:passwordValid,
       cnfpasswordValid:cnfpasswordValid
+
     }, this.validateForm);
   }
   validateForm() {
@@ -172,14 +173,16 @@ class Signup extends Component {
       city :this.state.city,
       password :this.state.password,
       cnfpassword :this.state.cnfpassword
+
     }
     this.props.submitSignup(SignupDetails);
   }
 
+
+
   render() {
     return (
-      <div className="container">
-       <center><img src={logo} alt="logo"/></center>
+
       <div className="div-align">
         <h3>Registration page</h3>
         <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
@@ -213,8 +216,8 @@ class Signup extends Component {
           <label>Mobile Number:</label>
             <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.mobileno}</div>
-              <label><span className="errorMsg">*</span> Batch</label>
 
+            <label><span className="errorMsg">*</span> Batch</label>
           <input type="number" required className={` ${this.errorClass(this.state.formErrors.batch)}`} name="batch" value={this.state.batch} onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.batch}</div>
 
@@ -233,7 +236,7 @@ class Signup extends Component {
           <button type="submit" className="button" value="Register" disabled={!this.state.formValid}>Signup</button>
         </form>
       </div>
-      </div>
+
     );
   }
 }

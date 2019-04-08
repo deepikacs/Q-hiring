@@ -27,13 +27,17 @@ export function submitLogin(logindata) {
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
     HttpWrapper('POST', '/user/login', false, logindata)
       .then(response => {
-        debugger
-        console.log(logindata);
+        console.log(response)
         dispatch(SuccessFunc(ActionTypes.FETCH_LOGIN_SUCCESS, response.data));
-        browserHistory.push('/Instruction');
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userid', response.data.userId);
+        console.log(response.data.userId)
+
+        browserHistory.push('/instruction');
       })
+
       .catch(error => {
-        dispatch(ErrorFunc(ActionTypes.FETCH_LOGIN_FAILURE, error));
+        dispatch(ErrorFunc(ActionTypes.FETCH_LOGIN_FAILURE, error.response.data));
       });
   };
 }

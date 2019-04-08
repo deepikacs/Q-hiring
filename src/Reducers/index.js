@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import LoginReducers from './LoginReducers';
+import LoginReducers from './LoginRducers';
 import SignupReducers from './SignupReducers';
 import QuestionReducers from './QuestionReducers';
 // import SelectedOptionReducer from './SelectedOptionReducers';
@@ -7,5 +7,6 @@ import QuestionReducers from './QuestionReducers';
 export default combineReducers({
   LoginReducers,
   SignupReducers,
-  QuestionReducers
+  QuestionReducers,
+  // SelectedOptionReducer
 });

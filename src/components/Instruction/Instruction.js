@@ -36,7 +36,7 @@ class Instruction extends Component {
     return (
       <div className="container">
         <h3><b>Instructions:</b></h3>
-        <Link to="/login" className="button">Logout</Link>
+        <Link to="/" className="button">Logout</Link>
         <div className="card red">
           <div className="card-body">Duration of the test - 60 mins. After 60 mins your answers will be auto submitted.</div>
         </div>

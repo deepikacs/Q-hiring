@@ -21,16 +21,15 @@ export function ErrorFunc(ActionType, error) {
 }
 
 export function submitSignup(userdata) {
-    return dispatch => {
-      dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN ));
-      HttpWrapper('POST', '/user/signup', false, userdata)
-        .then(response => {
-          dispatch(SuccessFunc(ActionTypes.ADD_SIGNUP_SUCCESS,response.data));
-          browserHistory.push('/');
-        })
-        .catch(error => {
-          dispatch(ErrorFunc(ActionTypes.ADD_SIGNUP_FAILURE,error));
-        });
-    };
-  }
-
+  return dispatch => {
+    dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN));
+    HttpWrapper('POST', '/user/signup', false, userdata)
+      .then(response => {
+        dispatch(SuccessFunc(ActionTypes.ADD_SIGNUP_SUCCESS, response.data));
+        browserHistory.push('/');
+      })
+      .catch(error => {
+        dispatch(ErrorFunc(ActionTypes.ADD_SIGNUP_FAILURE, error));
+      });
+  };
+}

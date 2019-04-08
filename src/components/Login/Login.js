@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './Login.css';
 import { submitLogin } from '../../Actions/LoginAction';
-import logo from '../../Images/logo.png';
 
 class Login extends Component {
   constructor(props) {
@@ -36,6 +35,11 @@ class Login extends Component {
         mobilenoValid = value.match(/^[0-9]{10}$/);
         fieldValidationError.mobileno = mobilenoValid ? '' : 'Invalid Mobile number ';
         break;
+      // case 'password':
+      //   passwordValid = value.match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+      //   fieldValidationError.password = passwordValid ? '' : "*Please enter secure and strong password."
+
+      //   break;
       default:
         break;
     }
@@ -67,31 +71,40 @@ class Login extends Component {
     this.props.submitLogin(loginDetails);
   }
 
+
+
   render() {
     return (
       <React.Fragment>
-        <center><img src={logo} className="padding-top" alt="logo"/></center>
-        <div className="align">
+
+        <div className="div-align">
           <center><h3>Login page</h3></center>
           <form method="" name="" onSubmit={this.submituserLoginForm} >
+
             <label>Mobile Number:</label>
             <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.mobileno}</div>
+
             <label>Password</label>
             <input type="password" required className={`${this.errorClass(this.state.formErrors.password)}`} name="password" value={this.state.password} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.passwordValid}</div>
+
             <input type="submit" className="button" value="Register" disabled={!this.state.formValid} />
           </form>
           <center><div className="errorMsg">{this.props.message}</div></center>
         </div>
+
+
+
       </React.Fragment>
+
     );
   }
 }
+
 const mapStateToProps = (state) => {
   const { error, message } = state.LoginReducers;
   return { error, message };
 };
-
 
 export default withRouter(connect(mapStateToProps, { submitLogin })(Login));

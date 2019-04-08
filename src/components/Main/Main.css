@@ -1,5 +1,5 @@
 
-  .display-position {
+  .dot{
     height: 75px;
     width:75px;
     background-color: #ab2525;
@@ -8,25 +8,26 @@
     float: right !important;
     text-align: center;
     color: white;
+    
   }
-
-.padding-top11 {
+  .paddTop-11{
     padding-top: 11px;
 }
-
-.padding-top23 {
-    padding-top: 23px;
+.paddTop-25{
+    padding-top: 25px;
 }
-
-.img-align{
+.paddleft-115{
+    padding-left: 115px;
+}
+.text-bold{
+    font-weight: bold;
+}
+.lineHeight{
+    line-height: 35px;
+}
+  .img-align{
     height: 70px;
   }
-
-.padding-left-120 {
-  padding-left: 120px;
-  line-height: 3em;
-}
-
   .horiztle-scrl{
       overflow:hidden;
   }
@@ -37,4 +38,3 @@
     margin-top: 20%;
     color: blue;
   }
-
