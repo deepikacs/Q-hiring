@@ -19,7 +19,6 @@ class Main extends Component {
     }
   }
   componentWillUnmount() {
-    debugger;
     clearInterval(this.timer);
   }
   componentDidMount() {
@@ -50,7 +49,6 @@ class Main extends Component {
 
   handleAnswer = (index, ansid, qid) => {
     this.setState({ checked: index });
-    console.log(this.state.checked);
     const data = {
       optionid: ansid,
       questionid: qid
@@ -73,7 +71,6 @@ class Main extends Component {
   }
 
   handleSubmit = () => {
-    debugger;
     var userid = localStorage.getItem('userid');
     if (this.state.answerArray.length > 0) {
       const selectedOptions = {
@@ -98,18 +95,6 @@ class Main extends Component {
 
 
   }
-
-  // showNextPage = () => {
-  //   debugger;
-  //   const { page, pagesNames, nextPage } = this.props;
-  //   const newPage = page + 1;
-  //   if(newPage < pagesNames.length){
-  //     nextPage(newPage);
-  //   }else{
-  //     nextPage(0);
-  //   }
-  // }
-
 
   render() {
     const { page, questionDetails, pagesNames } = this.props;
@@ -157,40 +142,10 @@ class Main extends Component {
                     <span className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</span>
                   </div>
                 </div>
-                {/* <button onClick={this.showNextPage}>Next</button> */}
-
-                {/* {item.questions.map((ans, index) =>
-                  (
-                    <div className="lineHeight">
-                      <input type="radio" name={ans.questionid}
-                        value={ans._id} key={index}
-
-                        onChange={this.handleAnswer.bind(this, index, ans._id, ans.questionid)}
-                      /> {ans.anstext}
-                    </div>
-                  ))} */}
-
-                {/* </div> */}
               </div>
             }
           })}
         </div>
-
-        {/* last */}
-
-        {/* <div className='row'>
-          <div className='col-sm-5'></div>
-          <div className='col-sm-6'>
-          </div>
-          <div className='col-sm-1'>
-          <span className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</span>
-          </div>
-        </div> */}
-
-        {/* <Link to={"/thankyou"}>Result</Link> */}
-        {/* <p>message={this.props.optionDetails}</p>  */}
-        {/* <Thankyou message={this.props.optionDetails} /> */}
-
       </div>
     );
   }

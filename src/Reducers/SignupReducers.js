@@ -10,7 +10,6 @@ export default (state = INPUT_STATE, action) => {
     case ActionTypes.ADD_SIGNUP_BEGIN:
       return { ...state, loading: true, error: null };
     case ActionTypes.ADD_SIGNUP_SUCCESS:
-      console.log(action);
       return { ...state, loading: false }
     case ActionTypes.ADD_SIGNUP_FAILURE:
       return { ...state, loading: false, error: action.payload.Login }

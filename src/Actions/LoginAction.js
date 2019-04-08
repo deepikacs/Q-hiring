@@ -22,17 +22,13 @@ export function ErrorFunc(ActionType, error) {
 
 export function submitLogin(logindata) {
   return dispatch => {
-    debugger;
 
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
     HttpWrapper('POST', '/user/login', false, logindata)
       .then(response => {
-        console.log(response)
         dispatch(SuccessFunc(ActionTypes.FETCH_LOGIN_SUCCESS, response.data));
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userid', response.data.userId);
-        console.log(response.data.userId)
-
         browserHistory.push('/instruction');
       })
 

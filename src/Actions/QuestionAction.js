@@ -24,7 +24,6 @@ export function Question() {
     dispatch(BeginFunc(ActionTypes.FETCH_QUESTION_BEGIN));
     HttpWrapper('GET', '/group/getall', true)
       .then(response => {
-        console.log(response)
         dispatch(SuccessFunc(ActionTypes.FETCH_QUESTION_SUCCESS, response.data));
       })
 
@@ -39,12 +38,7 @@ export function AddOptionsDetails(selectedoption) {
     dispatch(BeginFunc(ActionTypes.ADD_SELECTED_OPTION_BEGIN));
     HttpWrapper('POST', '/userquestions/addall', true, selectedoption)
       .then(response => {
-        console.log(response)
-        
         dispatch(SuccessFunc(ActionTypes.ADD_SELECTED_OPTION_SUCCESS, response.data));
-        // console.log('after dospatch', getState())
-        debugger;
-        // browserHistory.push('/thankyou');
 
       })
 
@@ -55,12 +49,10 @@ export function AddOptionsDetails(selectedoption) {
 }
 
 export const nextPage = (page) => (dispatch) => {
-  debugger
   dispatch({
     type: ActionTypes.NEXT_PAGE,
     page
   })
 }
 
-// for groups
 
