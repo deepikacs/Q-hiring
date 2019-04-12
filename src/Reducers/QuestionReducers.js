@@ -18,6 +18,8 @@ export default (state = INPUT_STATE, action) => {
       return { ...state, loading: false, questionDetails: action.payload.result, pagesNames }
     case ActionTypes.FETCH_QUESTION_FAILURE:
       return { ...state, loading: false, error: action.payload.message }
+
+
     case ActionTypes.ADD_SELECTED_OPTION_BEGIN:
       
     return { ...state, loading: true, error: null };
@@ -32,6 +34,7 @@ export default (state = INPUT_STATE, action) => {
       ...state,
       page: action.page
     }
+    
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import './Signup.css';
+import logo from '../../Images/logo.png';
 import { submitSignup } from '../../Actions/SignupAction'
 
 class Signup extends Component {
@@ -182,8 +183,10 @@ class Signup extends Component {
 
   render() {
     return (
-
+      <div>
+      <center><img src={logo} alt="logo" className="signup-img" /></center>
       <div className="div-align">
+       
         <h3>Registration page</h3>
         <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
           <label><span className="errorMsg">*</span> First Name</label>
@@ -235,6 +238,7 @@ class Signup extends Component {
 
           <button type="submit" className="button" value="Register" disabled={!this.state.formValid}>Signup</button>
         </form>
+      </div>
       </div>
 
     );

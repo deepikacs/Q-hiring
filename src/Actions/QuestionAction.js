@@ -32,7 +32,7 @@ export function Question() {
       });
   };
 }
-
+// question id with option
 export function AddOptionsDetails(selectedoption) {
   return (dispatch, getState) => {
     dispatch(BeginFunc(ActionTypes.ADD_SELECTED_OPTION_BEGIN));

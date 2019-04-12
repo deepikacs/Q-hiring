@@ -55,3 +55,8 @@ input[type=number]::-webkit-outer-spin-button {
 .brder-red{
   border-color: red;
 }
+.signup-img{
+  margin-bottom: -22px;
+  margin-top: 20px;
+  height: 70px;
+}

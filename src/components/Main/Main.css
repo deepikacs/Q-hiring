@@ -27,6 +27,7 @@
 }
   .img-align{
     height: 70px;
+    margin-top: 10px;
   }
   .horiztle-scrl{
       overflow:hidden;
@@ -37,4 +38,7 @@
   .textAlign{
     margin-top: 20%;
     color: blue;
+  }
+  .marginTop-51{
+    margin-top: 51px;
   }

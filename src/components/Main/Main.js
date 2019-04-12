@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../Images/qwinix.png';
+import logo from '../../Images/logo.png';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { Question, AddOptionsDetails, nextPage } from '../../Actions/QuestionAction';
@@ -12,7 +12,7 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      count: 10,
+      count: 60,
       checked: '',
       answerArray: [],
 
@@ -27,7 +27,7 @@ class Main extends Component {
   }
   tick() {
     this.setState({ count: (this.state.count - 1) })
-    if (this.state.count == 5) {
+    if (this.state.count == 10) {
       alert("last 10 min to submit");
     }
     if (this.state.count == 0) {
@@ -37,7 +37,7 @@ class Main extends Component {
   }
   startTimer() {
     clearInterval(this.timer);
-    this.timer = setInterval(this.tick.bind(this), 1000);
+    this.timer = setInterval(this.tick.bind(this), 60000);
 
   }
   stopTimer() {
@@ -77,11 +77,14 @@ class Main extends Component {
         userid: localStorage.getItem('userid'),
         questionAnswer: this.state.answerArray,
       };
+
       this.props.AddOptionsDetails(selectedOptions);
+
       const { page, pagesNames, nextPage } = this.props;
       const newPage = page + 1;
       if (newPage < pagesNames.length) {
         nextPage(newPage);
+        this.setState({answerArray:[]});
 
       }
       else {
@@ -100,7 +103,7 @@ class Main extends Component {
     const { page, questionDetails, pagesNames } = this.props;
     return (
       <div className="fluid-container horiztle-scrl">
-        <div className='row'>
+        <div className='row '>
           <div className='col-sm-5'></div>
           <div className='col-sm-6'>
             <img src={logo} alt="logo" className="img-align" />
@@ -114,9 +117,9 @@ class Main extends Component {
           {questionDetails.map((item, index) => {
             if (pagesNames[page] === item.name) {
               return <div>
-                <div className='row'>
+                <div className='row marginTop-51'>
                   <div className='col-sm-5'></div>
-                  <div className='col-sm-6 paddLeft-41'> <h2>{item.name}</h2></div>
+                  <div className='col-sm-6 paddLeft-41'> <h2 key={item.id}>{item.name}</h2></div>
                   <div className='col-sm-1'></div>
 
                 </div>
