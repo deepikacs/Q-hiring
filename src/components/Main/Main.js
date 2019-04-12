@@ -15,6 +15,9 @@ class Main extends Component {
       count: 60,
       checked: '',
       answerArray: [],
+      shownext:true,
+      showprevious:false,
+
 
     }
   }
@@ -71,6 +74,7 @@ class Main extends Component {
   }
 
   handleSubmit = () => {
+    debugger;
     var userid = localStorage.getItem('userid');
     if (this.state.answerArray.length > 0) {
       const selectedOptions = {
@@ -80,22 +84,58 @@ class Main extends Component {
 
       this.props.AddOptionsDetails(selectedOptions);
 
-      const { page, pagesNames, nextPage } = this.props;
-      const newPage = page + 1;
-      if (newPage < pagesNames.length) {
-        nextPage(newPage);
-        this.setState({answerArray:[]});
+       
 
-      }
-      else {
-        browserHistory.push('/thankyou');
-      }
+      // else {
+      //   browserHistory.push('/thankyou');
+      // }
     }
     else {
       alert("please select atleast one answer");
     }
+   }
+   handlePrevious = () =>{
 
+    const { page, pagesNames, nextPage } = this.props;
+    debugger;
 
+    let newPage = page;
+    if(page == 0){
+      newPage = page;
+    }
+    else{
+      newPage = page - 1;
+    }
+
+    if (newPage < pagesNames.length) {
+      nextPage(newPage);
+
+      if (newPage ==  0) {
+        this.state.showprevious=false;
+        
+      }
+      else{
+        this.state.showprevious=true;
+      }
+    }
+
+  }
+
+  handleNext = () =>{
+
+    
+    const { page, pagesNames, nextPage } = this.props;
+ 
+    const newPage = page + 1;
+    if (newPage < pagesNames.length) {
+      nextPage(newPage);
+      
+      this.state.showprevious=true;
+      
+      if (newPage ==  pagesNames.length-1) {
+        this.state.shownext = false;
+      }
+    }
 
   }
 
@@ -115,6 +155,7 @@ class Main extends Component {
 
         <div>
           {questionDetails.map((item, index) => {
+            debugger;
             if (pagesNames[page] === item.name) {
               return <div>
                 <div className='row marginTop-51'>
@@ -139,10 +180,13 @@ class Main extends Component {
                 ))
                 }<div className='row'>
                   <div className='col-sm-5'></div>
+                  {/* if (item.name === 'lo'){} */}
                   <div className='col-sm-6'>
+                  {this.state.showprevious?  <button onClick={this.handlePrevious} >Previous</button> : '' }
+                  {this.state.shownext ?  <button  onClick={this.handleNext}>Next</button> : <button className="dot paddTop-25" onClick={this.handleSubmit}>submit1</button>}
                   </div>
                   <div className='col-sm-1'>
-                    <span className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</span>
+                    {/* <span className="dot paddTop-25" onClick={this.handleSubmit} disabled={this.state.answerArray.length > 0}>Submit</span> */}
                   </div>
                 </div>
               </div>
