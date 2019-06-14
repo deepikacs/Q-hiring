@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import './Login.css';
 import { submitLogin } from '../../Actions/LoginAction';
 
@@ -65,6 +65,7 @@ class Login extends Component {
   }
 
   submituserLoginForm(e) {
+    debugger;
     e.preventDefault();
     const loginDetails = { mobileno: this.state.mobileno, password: this.state.password };
     this.props.submitLogin(loginDetails);
@@ -91,6 +92,7 @@ class Login extends Component {
             <input type="submit" className="button" value="Register" disabled={!this.state.formValid} />
           </form>
           <center><div className="errorMsg">{this.props.message}</div></center>
+        <center><div className="errorMsg">{this.props.error}</div></center>
         </div>
 
 

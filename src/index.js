@@ -11,6 +11,14 @@ import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(Reducers, {}, composeEnhancers(applyMiddleware(ReduxThunk)));
+
+// const store = applyMiddleware(middleware)(
+//   require('redux-devtools').devTools()(
+//    require('redux-devtools').persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)))()
+//  )
+ 
+//  (createStore);
+
 const app = (
   <Provider store={store}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>

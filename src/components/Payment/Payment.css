@@ -1,0 +1,45 @@
+.lable-align{
+    font-family: bold;
+    font-size: 20px;
+  }
+  /* .input-align{
+    width: 50%;
+    height: 30px;
+    border-radius: 2px;
+    margin-top: 13px;
+    margin-left: 99px;
+  } */
+  .div-align{
+    width: 45%;
+    border: 2px solid #d6d7da;
+    padding: 38px 50px 71px 53px;
+    border-radius: 5px;
+    font-family: arial;
+    /* line-height: 16px; */
+    color: #333333;
+    font-size: 14px;
+    background:#f2f2f2;
+    margin: 100px auto;
+  }
+  .btn-color{
+    background-color: aqua;
+  }
+  .title-align{
+    font-size: 20px;
+    color: black;
+  }
+  
+  .input-align {
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid black;
+  }
+  
+  
+  

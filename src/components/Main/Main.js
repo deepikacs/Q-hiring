@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../../Images/logo.png';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { Question, AddOptionsDetails, nextPage } from '../../Actions/QuestionAction';
 import './Main.css';
 import { Link } from 'react-router-dom';
@@ -108,6 +108,7 @@ class Main extends Component {
     }
 
     if (newPage < pagesNames.length) {
+      debugger;
       nextPage(newPage);
 
       if (newPage ==  0) {
@@ -115,7 +116,8 @@ class Main extends Component {
         
       }
       else{
-        this.state.showprevious=true;
+        // this.state.showprevious=true;
+        this.state.shownext = true;
       }
     }
 
@@ -135,6 +137,7 @@ class Main extends Component {
       if (newPage ==  pagesNames.length-1) {
         this.state.shownext = false;
       }
+
     }
 
   }
@@ -155,24 +158,23 @@ class Main extends Component {
 
         <div>
           {questionDetails.map((item, index) => {
-            debugger;
             if (pagesNames[page] === item.name) {
               return <div>
                 <div className='row marginTop-51'>
                   <div className='col-sm-5'></div>
-                  <div className='col-sm-6 paddLeft-41'> <h2 key={item.id}>{item.name}</h2></div>
+                  <div className='col-sm-6 paddLeft-41'> <h2 key={index}>{item.name}</h2></div>
                   <div className='col-sm-1'></div>
 
                 </div>
-                {item.questions.map((qns, index) => (
-                  <div className="paddleft-115 text-bold">{index + 1}. {qns.questtext}
-                    {qns.options.map((opt, index) =>
+                {item.questions.map((qns, index1) => (
+                  <div className="paddleft-115 text-bold" key={index1}>{index1 + 1}. {qns.questtext}
+                    {qns.options.map((opt, index2) =>
                       (
                         <div className="lineHeight">
                           <input type="radio" name={opt.questionid}
-                            value={opt._id} key={index}
+                            value={opt._id} key={index2}
 
-                            onChange={this.handleAnswer.bind(this, index, opt._id, opt.questionid)}
+                            onChange={this.handleAnswer.bind(this, index2, opt._id, opt.questionid)}
                           /> {opt.anstext}
                         </div>
                       ))}

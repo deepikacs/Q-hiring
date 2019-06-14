@@ -216,7 +216,7 @@ class Signup extends Component {
           <input type="number" required className={` ${this.errorClass(this.state.formErrors.year)}`} name="year" value={this.state.year} onChange={this.handleChange} />
           <div className="errorMsg">{this.state.formErrors.year}</div>
 
-          <label>Mobile Number:</label>
+          <label><span className="errorMsg">*</span>Mobile Number:</label>
             <input type="number" required className={` ${this.errorClass(this.state.formErrors.mobileno)}`} name="mobileno" value={this.state.mobileno} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.mobileno}</div>
 
