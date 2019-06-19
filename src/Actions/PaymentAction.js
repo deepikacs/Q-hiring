@@ -1,7 +1,6 @@
 import * as ActionTypes from './types';
 
 // export const displayToken = (name) => (dispatch) => {
-//   debugger
 //     dispatch({
 //       type: ActionTypes.FETCH_PAYMENTDETAILS_SUCCESS,
 //       name

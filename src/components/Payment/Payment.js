@@ -51,11 +51,9 @@ class Payment extends Component {
   
 
   handleFormSubmit(e) {
-    debugger;
     // e.preventDefault();
 
     // window.recurly.token(document.querySelector("#recurly_form"), (err, token) => {
-      debugger;
       let name="aaaa";
       this.props.displayToken(name);
       // if (err) {

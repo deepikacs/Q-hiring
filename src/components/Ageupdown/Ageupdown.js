@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { onAgeUp,onAgDown } from '../../Actions/AgeupdownAction';
 
 class Ageupdown extends Component {
@@ -21,8 +21,8 @@ class Ageupdown extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { age } = state.AgeupdownReducers;
+    const { age, } = state.AgeupdownReducers;
     return { age };
   };
   
-  export default withRouter(connect(mapStateToProps, { onAgeUp,onAgDown})(Ageupdown));
+  export default connect(mapStateToProps, { onAgeUp,onAgDown})(Ageupdown);

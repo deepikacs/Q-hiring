@@ -65,7 +65,6 @@ class Login extends Component {
   }
 
   submituserLoginForm(e) {
-    debugger;
     e.preventDefault();
     const loginDetails = { mobileno: this.state.mobileno, password: this.state.password };
     this.props.submitLogin(loginDetails);

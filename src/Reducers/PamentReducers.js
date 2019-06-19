@@ -38,7 +38,6 @@ export default (state = INPUT_STATE, action) => {
 //     };
 
 //     const storePaymentToken = (state=initialState, action) => {
-//         debugger;
 //     const newState = {...state};
 //     // switch(action.type){
 //                 // case 'FETCH_PAYMENTDETAILS_SUCCESS': 

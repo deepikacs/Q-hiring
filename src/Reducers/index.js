@@ -4,6 +4,8 @@ import SignupReducers from './SignupReducers';
 import QuestionReducers from './QuestionReducers';
 import PamentReducers from './PamentReducers';
 import AgeupdownReducers from './AgeupdownReducers';
+import FormReduxReducers from './FormReduxReducers';
+import ReduxExampleReducers from './ReduxExampleReducers';
 // import SelectedOptionReducer from './SelectedOptionReducers';
 
 export default combineReducers({
@@ -11,6 +13,8 @@ export default combineReducers({
   SignupReducers,
   QuestionReducers,
   PamentReducers,
-  AgeupdownReducers
+  AgeupdownReducers,
+  FormReduxReducers,
+  ReduxExampleReducers
   // SelectedOptionReducer
 });
