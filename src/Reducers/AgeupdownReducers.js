@@ -113,6 +113,7 @@ import * as ActionTypes from '../Actions/types';
 
   const initialState = {
     age:20,
+    ageupMessage:'ageup successfuly'
   };
   export default (state = initialState, action) => {
   

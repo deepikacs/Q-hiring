@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { submitData } from '../../Actions/Signup1Action';
+import { AlertFunction } from '../../Actions/AlertAction'; 
 import {Form,Label,Input} from 'reactstrap';
-import TableComponent from './TableComponent';
 
-class Reduxtask2 extends Component {
+class Signup1 extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -31,13 +33,15 @@ class Reduxtask2 extends Component {
         let x=this.state.option.push(reqobj);
         this.setState({x});
 
+        this.props.submitData(reqobj);
+        this.props.AlertFunction();
+        this.props.history.push('/');
         
-        console.log(this.state.option);
      }
     render() {
         return (
             <div>
-                 <Form className="div-align">
+                    <Form className="div-align">
         <Label>firstName</Label>
          <Input type="text" name="firstName"  onChange={this.handleChange}/><br/>
          <Label>SecondName</Label>
@@ -48,13 +52,15 @@ class Reduxtask2 extends Component {
         <Input type="text" name="city" onChange={this.handleChange}/><br/>
         <button type="button" onClick={this.handleSubmit}>submit</button>
     </Form>
-
-        <TableComponent option={this.state.option}/>
-        <button>button</button>
                 
             </div>
         );
     }
 }
-
-export default Reduxtask2;
+const mapStateToProps = (state) => {
+    const { msg,array } = state.FormReduxReducers;
+    return {msg,array};
+  };
+  
+  export default connect(mapStateToProps, { submitData, AlertFunction })(Signup1);
+// export default Signup1;

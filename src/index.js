@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import AlertWrapper from './components/AlertWrapper';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -22,7 +22,7 @@ const store = createStore(Reducers, {}, composeEnhancers(applyMiddleware(ReduxTh
 const app = (
   <Provider store={store}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Route component={App} />
+      <Route component={AlertWrapper} />
     </BrowserRouter>
   </Provider>
 );

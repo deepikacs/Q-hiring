@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText ,Table} from 'reactstrap';
+import {Table} from 'reactstrap';
 
 class TableComponent extends Component {
     render() {

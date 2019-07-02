@@ -23,3 +23,9 @@ export const AGE_DOWN = 'AGE_DOWN';
 export const FORMREDUX_SUCCES='FORMREDUX_SUCCES';
 
 export const FORM_SUBMIT='FORM_SUBMIT';
+
+export const UPDATE_A='UPDATE_A';
+export const UPDATE_B='UPDATE_B';
+
+export const SIGNUP_FORM_SUBMIT='SIGNUP_FORM_SUBMIT';
+export const ALERT_MESSAGE='ALERT_MESSAGE';

@@ -103,6 +103,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('====>', state);
   const { error, message } = state.LoginReducers;
   return { error, message };
 };

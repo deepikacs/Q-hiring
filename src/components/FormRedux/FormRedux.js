@@ -14,12 +14,12 @@ class FormRedux extends Component {
 
     }
     handleChange =(e)=>{
-        debugger;
+        
         this.setState({[e.target.name]:e.target.value});
     }
     handleSubmit=(e)=>{
         e.preventDefault();
-        debugger;
+        
         let reqobj={
             name1:this.state.name,
             age1:this.state.age
@@ -59,9 +59,9 @@ class FormRedux extends Component {
 
 
 const mapStateToProps = (state) => {
-    debugger;
-    const { message,array } = state.FormReduxReducers;
-    return {message,array };
+    
+    const { message1,array } = state.FormReduxReducers;
+    return {message1,array};
   };
   
   export default connect(mapStateToProps, { submitForm })(FormRedux);

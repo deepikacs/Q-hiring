@@ -22,7 +22,7 @@ class Signup extends Component {
       password:'',
       cnfpassword:'',
 
-      formErrors: { firstname: '', lastname: '', email:'',college:'',branch:'',year:'',mobileno:'',batch:'',city:'',password:'',cnfpassword:'' },
+      formErrors: { firstname: '', lastname: '', email:'',college:'',branch:'',year:'',mobileno:'',batch:'',city:'',password:'',cnfpassword:'', },
       firstnameValid: false,
       lastnameValid: false,
       emailValid: false,
@@ -68,52 +68,62 @@ class Signup extends Component {
     switch (fieldName) {
       
       case 'firstname':
-        firstnameValid = value.match(/^[a-zA-Z ]*$/);
-        fieldValidationErrors.firstname = firstnameValid ? '' : ' * Invalid Name :First Name contain characters only.';
+        var firstnameValidNew = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.firstname = firstnameValidNew ? '' : ' * Invalid Name :First Name contain characters only.';
+        firstnameValid=firstnameValidNew ? true:false;
         break;
       case 'lastname':
-         lastnameValid = value.match(/^[a-zA-Z ]*$/);
-        fieldValidationErrors.lastname =  lastnameValid ? '' : '* Invalid Name :Last Name contain characters only.';
+        var lastnameValidNew = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.lastname = lastnameValidNew ? '' : '* Invalid Name :Last Name contain characters only.';
+        lastnameValid=lastnameValidNew ? true:false;
         break;
 
         case 'email':
-       emailValid = value.match(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        fieldValidationErrors.email = emailValid ? '' : '* Invalid email : Please enter valid email-ID.'
+       var emailValidNew = value.match(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        fieldValidationErrors.email = emailValidNew ? '' : '* Invalid email : Please enter valid email-ID.'
+        emailValid=emailValidNew ? true:false;
         break;
 
         case 'college':
-       collegeValid = value.match(/^[a-zA-Z ]*$/);
-        fieldValidationErrors.college = collegeValid ? '' : ' *Please enter your college';
+       var  collegeValidNew = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.college = collegeValidNew ? '' : ' *Please enter your college';
+        collegeValid=collegeValidNew? true:false;
         break;
 
         case 'branch':
-        branchValid = value.match(/^[a-zA-Z ]*$/);
-        fieldValidationErrors.branch = branchValid ? '' : ' *Please enter your branch';
+        var branchValidNew = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.branch = branchValidNew ? '' : ' *Please enter your branch';
+        branchValid=branchValidNew ? true:false;
         break;
 
         case 'year':
-         yearValid = value.match(/^\d{4}$/);
-        fieldValidationErrors.year =  yearValid ? '' : ' *Please enter your year of passing';
+        var yearValidNew = value.match(/^\d{4}$/);
+        fieldValidationErrors.year = yearValidNew ? '' : ' *Please enter your year of passing';
+        yearValid=yearValidNew ? true:false;
         break;
 
         case 'mobileno':
-        mobilenoValid = value.match(/^[0-9]{10}$/);
-        fieldValidationErrors.mobileno = mobilenoValid ? '' : 'Invalid Mobile number ';
+       var  mobilenoValidNew = value.match(/^[0-9]{10}$/);
+        fieldValidationErrors.mobileno = mobilenoValidNew ? '' : 'Invalid Mobile number ';
+        mobilenoValid=mobilenoValidNew? true:false;
         break;
 
         case 'batch':
-        batchValid = value.match(/^\d{4}$/);
-        fieldValidationErrors.batch = batchValid ? '' : ' *Please enter your batch';
+        var batchValidNew = value.match(/^\d{4}$/);
+        fieldValidationErrors.batch = batchValidNew ? '' : ' *Please enter your batch';
+        batchValid=batchValidNew ? true:false;
         break; 
         
         case 'city':
-       cityValid = value.match(/^[a-zA-Z ]*$/);
-        fieldValidationErrors.city = cityValid ? '' : ' *Please enter your branch';
+       var  cityValidNew = value.match(/^[a-zA-Z ]*$/);
+        fieldValidationErrors.city = cityValidNew ? '' : ' *Please enter your branch';
+        cityValid=cityValidNew ?true:false;
         break;
 
         case 'password':
-          passwordValid = value.match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
-          fieldValidationErrors.password = passwordValid ? '' : "*Please enter secure and strong password."
+          var passwordValidNew = value.match("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+          fieldValidationErrors.password = passwordValidNew ? '' : "*Please enter secure and strong password."
+          passwordValid=passwordValidNew ? true:false;
           break;   
           
           case 'cnfpassword':
@@ -148,7 +158,9 @@ class Signup extends Component {
     }, this.validateForm);
   }
   validateForm() {
-      this.setState({ formValid:this.state.firstnameValid && this.state.lastnameValid && this.state.emailValid && this.state.collegeValid && this.state.branchValid && this.state.yearValid && this.state.mobilenoValid && this.state.batchValid && this.state.cityValid && this.state.passwordValid && this.state.cnfpasswordValid});
+    if(this.state.firstnameValid && this.state.lastnameValid && this.state.emailValid && this.state.collegeValid && this.state.branchValid && this.state.yearValid && this.state.mobilenoValid && this.state.batchValid && this.state.cityValid && this.state.passwordValid && this.state.cnfpasswordValid){
+      this.setState({ formValid:!this.state.formValid});
+    }
     
   console.log(this.state.formValid);
   }
