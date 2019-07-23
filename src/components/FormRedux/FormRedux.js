@@ -14,12 +14,12 @@ class FormRedux extends Component {
 
     }
     handleChange =(e)=>{
-        debugger;
+        // debugger;
         this.setState({[e.target.name]:e.target.value});
     }
     handleSubmit=(e)=>{
         e.preventDefault();
-        debugger;
+        // debugger;
         let reqobj={
             name1:this.state.name,
             age1:this.state.age
@@ -59,7 +59,7 @@ class FormRedux extends Component {
 
 
 const mapStateToProps = (state) => {
-    debugger;
+    // debugger;
     const { message,array } = state.FormReduxReducers;
     return {message,array };
   };

@@ -33,7 +33,7 @@ const initialState={
 }
 
 export default(state=initialState,action)=>{
-  debugger;
+  // debugger;
   console.log(state.array);
   // let array1=[];
   // array1.push(state.array);

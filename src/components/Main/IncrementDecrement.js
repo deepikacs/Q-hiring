@@ -21,7 +21,7 @@ class Amount extends Component{
       }
     
       onIncrement = () => {
-        debugger;
+        // debugger;
         this.setState(state => ({ amount: state.amount + 1 }));
       };
     

@@ -74,7 +74,7 @@ class Main extends Component {
   }
 
   handleSubmit = () => {
-    debugger;
+    // debugger;
     var userid = localStorage.getItem('userid');
     if (this.state.answerArray.length > 0) {
       const selectedOptions = {
@@ -97,7 +97,7 @@ class Main extends Component {
    handlePrevious = () =>{
 
     const { page, pagesNames, nextPage } = this.props;
-    debugger;
+    // debugger;
 
     let newPage = page;
     if(page == 0){
@@ -108,7 +108,7 @@ class Main extends Component {
     }
 
     if (newPage < pagesNames.length) {
-      debugger;
+      // debugger;
       nextPage(newPage);
 
       if (newPage ==  0) {

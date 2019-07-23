@@ -4,7 +4,7 @@ const initialState={
   message:'',
 }
 export default(state=initialState,action)=>{
-    debugger;
+    // debugger;
     switch (action.type) {
         case ActionTypes.FORM_SUBMIT:
         return { ...state,message:'successfuly added'};

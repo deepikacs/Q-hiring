@@ -15,6 +15,10 @@ import Ageupdown from '../Ageupdown';
 import Reduxtask2 from '../Reduxtask2/Reduxtask2';
 import FormRedux from '../FormRedux';
 import ReduxExample from '../ReduxExample';
+import Location from '../Location';
+import RstDetails from '../RstDetails';
+import MenuList from '../MenuList';
+import FoodList from '../FoodList';
 
 class App extends Component {
   render() {
@@ -35,7 +39,10 @@ class App extends Component {
           <Route exact path="/form" component={Reduxtask2}></Route>
           <Route exact path="/f" component={FormRedux}></Route>
           <Route exact path="/example" component={ReduxExample}></Route>
-
+          <Route exact path="/location" component={Location}></Route>
+          <Route exact path="/rst" component={RstDetails}></Route>
+          <Route exact path="/menulist" component={MenuList}></Route>
+          <Route exact path="/foodlist" component={FoodList}></Route>
         </Switch>
       </Router>
     );
